@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>FastAPI下的内存马</title>
+      <link href="/2025/11/03/FastAPI%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"/>
+      <url>/2025/11/03/FastAPI%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/</url>
+      
+        <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>前两天bao师傅出了fastapi的内存马，由于自己学过flask的内存马，所以参考了一篇文章很快就打通了！一开始想着原理应该都差不多吧，但是转念一想重要的应该是分析代码和探索的能力！自己这方面的能力比较弱，所以打算写篇文章学习一下（不能逃避）！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> python内存马 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 内存马 </tag>
+            
+            <tag> fastapi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>成都大学第八届玄武杯（ak）</title>
       <link href="/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"/>
       <url>/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/</url>
@@ -73,16 +100,16 @@
       
       <categories>
           
-          <category> flask内存马 </category>
+          <category> python内存马 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> flask </tag>
-            
             <tag> 内存马 </tag>
+            
+            <tag> flask </tag>
             
         </tags>
       
