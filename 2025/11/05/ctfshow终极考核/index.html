@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="前言第一次接触这内网渗透，收获还是挺多的！对思路的提升还是很不错的!下面一起来品鉴一下吧！着重整体思路的分析，有些细节可能不会去写！ 信息收集和漏洞利用我们的目标其实就是围绕这3个标题展开的 &#x2F;index.php抓包响应头里面有个flag，目录扫描扫出个source.txt 123456789101112131415161718192021222324252627282930313233">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ctfshow终极考核">
+<meta property="og:title" content="ctfshow终极考核（未完）">
 <meta property="og:url" content="https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/index.html">
 <meta property="og:site_name" content="Rufeii">
 <meta property="og:description" content="前言第一次接触这内网渗透，收获还是挺多的！对思路的提升还是很不错的!下面一起来品鉴一下吧！着重整体思路的分析，有些细节可能不会去写！ 信息收集和漏洞利用我们的目标其实就是围绕这3个标题展开的 &#x2F;index.php抓包响应头里面有个flag，目录扫描扫出个source.txt 123456789101112131415161718192021222324252627282930313233">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/11.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/12.png">
 <meta property="article:published_time" content="2025-11-05T07:23:10.000Z">
-<meta property="article:modified_time" content="2025-11-09T11:08:27.932Z">
+<meta property="article:modified_time" content="2025-11-09T11:16:19.267Z">
 <meta property="article:author" content="Rufeii">
 <meta property="article:tag" content="内网渗透">
 <meta property="article:tag" content="udf提权">
@@ -41,7 +41,7 @@
       
     
     <!-- title -->
-    <title>ctfshow终极考核</title>
+    <title>ctfshow终极考核（未完）</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -105,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&text=ctfshow终极考核"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&is_video=false&description=ctfshow终极考核"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ctfshow终极考核&body=Check out this article: https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&name=ctfshow终极考核&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&t=ctfshow终极考核"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&text=ctfshow终极考核（未完）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&is_video=false&description=ctfshow终极考核（未完）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ctfshow终极考核（未完）&body=Check out this article: https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&name=ctfshow终极考核（未完）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&t=ctfshow终极考核（未完）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -134,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        ctfshow终极考核
+        ctfshow终极考核（未完）
     </h1>
 
 
@@ -260,16 +260,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&text=ctfshow终极考核"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&is_video=false&description=ctfshow终极考核"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ctfshow终极考核&body=Check out this article: https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&name=ctfshow终极考核&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&t=ctfshow终极考核"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&text=ctfshow终极考核（未完）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&is_video=false&description=ctfshow终极考核（未完）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ctfshow终极考核（未完）&body=Check out this article: https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&title=ctfshow终极考核（未完）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&name=ctfshow终极考核（未完）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/&t=ctfshow终极考核（未完）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
