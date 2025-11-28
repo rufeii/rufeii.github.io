@@ -18,6 +18,16 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 脏数据 </tag>
+            
+            <tag> flask内存马 </tag>
+            
+            <tag> php特性{}rce </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -124,9 +134,9 @@
       
         <tags>
             
-            <tag> 内存马 </tag>
-            
             <tag> flask </tag>
+            
+            <tag> 内存马 </tag>
             
         </tags>
       
