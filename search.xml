@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>kali配置代理下载GitHack</title>
+      <link href="/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/"/>
+      <url>/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/</url>
+      
+        <content type="html"><![CDATA[<p>GitHack工具落后了，所以重新下载一个，配置一下代理</p><h2 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h2><p>在clash里面把局域网连接打开，只要是我这台电脑的网卡进来都走这个</p><p><img src="/../images/achieve/2025/12/image-20251227211234755.png" alt="image-20251227211234755"></p><p>然后VMware设置桥接模式。<strong>目的：让虚拟机和物理机平起平坐，处于同一网段。</strong></p><p><img src="/../images/achieve/2025/12/image-20251227211506305.png" alt="image-20251227211506305"></p><p>虚拟机设置里面，然后kali配置临时代理</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http<span class="built_in">_</span>proxy=&quot;http://172.25.173.165:7897&quot;                                       </span><br><span class="line">export https<span class="built_in">_</span>proxy=&quot;http://172.25.173.165:7897&quot;</span><br></pre></td></tr></table></figure><p>IP为无线局域网适配器 WLAN下的ipv4</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://google.com   </span><br><span class="line">用这个来检验一下</span><br></pre></td></tr></table></figure><h2 id="下载工具"><a href="#下载工具" class="headerlink" title="下载工具"></a>下载工具</h2><p>直接</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/lijiejie/GitHack.git</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>直接看我之前的文章</p><p><a href="https://blog.csdn.net/2403_88003384/article/details/148908011?ops_request_misc=%7B%22request_id%22:%227a7a133f531abfa6c67ffbe60fe89786%22,%22scm%22:%2220140713.130102334.pc_blog.%22%7D&request_id=7a7a133f531abfa6c67ffbe60fe89786&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-148908011-null-null.nonecase&utm_term=git&spm=1018.2226.3001.4450">CTFHub Web 信息泄露 Git泄露（log，stash，index）_git泄露得到index-CSDN博客</a></p><p>ok结束！</p><h2 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h2><p>还可以使用<code>proxychains</code>这个来走代理，改这个文件&#x2F;etc&#x2F;proxychains4.conf</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">#</span> 把这里改成你之前成功的那个物理 IP 和端口</span><br><span class="line">socks5  172.25.173.165  7897</span><br></pre></td></tr></table></figure><p>之后的使用就是加前缀就好了，之前搭建隧道用的就是这个</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains git clone https://github.com/...</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> GitHack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sqli-labs-master</title>
       <link href="/2025/12/22/sqli-labs-master/"/>
       <url>/2025/12/22/sqli-labs-master/</url>
@@ -338,9 +357,9 @@
       
         <tags>
             
-            <tag> 内存马 </tag>
-            
             <tag> flask </tag>
+            
+            <tag> 内存马 </tag>
             
         </tags>
       
