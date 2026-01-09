@@ -17,11 +17,11 @@
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107210729433.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107212159501.png">
 <meta property="og:image" content="https://fushuling-1309926051.cos.ap-shanghai.myqcloud.com/2023/08/7-1-1024x278.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/40360431/1758445860995-b29fb70b-cbf6-4441-8ec2-d6656a8554c2.png?x-oss-process=image/format,webp">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107233812932.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107231729501.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107232346779.png">
 <meta property="article:published_time" content="2026-01-07T12:34:30.000Z">
-<meta property="article:modified_time" content="2026-01-07T15:30:22.655Z">
+<meta property="article:modified_time" content="2026-01-08T09:46:42.473Z">
 <meta property="article:author" content="Rufeii">
 <meta property="article:tag" content="pass the hash">
 <meta property="article:tag" content="SID滥用">
@@ -203,7 +203,7 @@
 <p>ASREPRoast攻击是一种离线爆破用户账号的攻击方式，它利用了Kerberos预身份验证的局限性。攻击者需要用户账号设置“不要求Kerberos预身份验证”选项，而该选项默认是没有勾选的。当攻击者勾选了该选项后，域控不会进行任何验证，直接返回用户Hash加密的Session Key。攻击者可以使用这些Session Key进行离线破解，如果字典足够强大，就能破解得到该指定用户的明文密码。</p>
 <p>使用指定用户向域控制器的Kerberos 88端口请求票据，此时域控不会进行任何验证就将TGT和该用户Hash加密的Login Session Key 返回。进行离线破解，得到账户密码</p>
 </blockquote>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AS-REP</span><br><span class="line">KDC接受到请求后，会先通过AD活动目录查询该用户的密码Hash，然后AS会使用Client<span class="built_in">_</span>hash对请求包中的Authenticator进行解密，解密成功且时间戳范围在五分钟内则返回用krbtgt用户(它是 Windows 域的内置服务账户，密码由系统随机生成且无法手动登录，唯一作用是加密 TGT)hash加密的TGT票据，TGT里面包含PAC (特权属性证书)  ，PAC包含Client的sid、Client所在的组。除此之外AS会生成一个临时秘钥Login session key，并使用用户(之前发请求那个用户)NTLM-Hash加密Login session key作为响应包的一部分内容</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">AS-REP</span><br><span class="line"></span><br><span class="line">KDC接受到请求后，会先通过AD活动目录查询该用户的密码Hash，然后AS会使用Client<span class="built_in">_</span>hash对请求包中的</span><br><span class="line"></span><br><span class="line">Authenticator进行解密，解密成功且时间戳范围在五分钟内则返回用krbtgt用户(它是 Windows 域的内置服务账</span><br><span class="line"></span><br><span class="line">户，密码由系统随机生成且无法手动登录，唯一作用是加密 TGT)hash加密的TGT票据，TGT里面包含PAC (特权属性证</span><br><span class="line"></span><br><span class="line">书)  ，PAC包含Client的sid、Client所在的组。除此之外AS会生成一个临时秘钥Login session key，并使用用</span><br><span class="line"></span><br><span class="line">户(之前发请求那个用户)NTLM-Hash加密Login session key作为响应包的一部分内容</span><br></pre></td></tr></table></figure>
 
 <p>简单来说问题发生在Kerberos认证的AS-REP阶段，正常它是会对AS-REQ请求进行验证，但是这里没有验证造成了安全漏洞</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-GetNPUsers -dc-ip 172.22.6.12 -usersfile user.txt xiaorang.lab/</span><br></pre></td></tr></table></figure>
@@ -220,7 +220,7 @@
 <p>发现yuxuan，用户与计算机时进行会话时，凭据会保留在内存中，说明yuxuan这个用户登录过WIN2019，很多用户习惯将计算机设置自动登录，这样就可以查询注册表来获取自动登录的用户名和密码了。</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg query &quot;HKEY<span class="built_in">_</span>LOCAL<span class="built_in">_</span>MACHINE<span class="keyword">\SOFTWARE</span><span class="keyword">\Microsoft</span><span class="keyword">\Windows</span> NT<span class="keyword">\CurrentVersion</span><span class="keyword">\Winlogon</span>&quot;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/40360431/1758445860995-b29fb70b-cbf6-4441-8ec2-d6656a8554c2.png?x-oss-process=image/format,webp" alt="image.png"></p>
+<p><img src="/../images/achieve/2026/1/image-20260107233812932.png" alt="image-20260107233812932"></p>
 <p>使用这个用户重新去登录一下，然后使用工具SharpHound进行数据采集</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SharpHound.exe -c all</span><br></pre></td></tr></table></figure>
 
