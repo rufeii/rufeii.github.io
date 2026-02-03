@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>something-about-buuctf</title>
+      <link href="/2026/02/03/something-about-buuctf/"/>
+      <url>/2026/02/03/something-about-buuctf/</url>
+      
+        <content type="html"><![CDATA[<h2 id="GXYCTF2019-BabySQli"><a href="#GXYCTF2019-BabySQli" class="headerlink" title="[GXYCTF2019]BabySQli"></a>[GXYCTF2019]BabySQli</h2><p><img src="/../images/achieve/2026/1/image-20260203210525674.png" alt="image-20260203210525674"></p><p>一个登录框直接开搞，万能密码试了不行，已经说了是sql就没着急去考虑弱口令什么的！sqlmap测出时间盲注，直接梭哈，但是太久了，而且密码貌似还是md5加密的，所以脱库的价值不大，因为貌似里面没有flag，可能就是要让我们登录给flag</p><img src="../images/achieve/2026/1/image-20260203211005274.png" alt="image-20260203211005274"  /><p>cmd5在线碰撞失败。。。。</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where username = &#x27;<span class="built_in">$</span>name&#x27;</span><br></pre></td></tr></table></figure><p>也就是说，那这个sql执行的结果里面的密码来进行比对，这里我们可以通过union去控制返回的结果，只不过结果不会回显到页面</p><p><img src="/../images/achieve/2026/1/image-20260203211346005.png" alt="image-20260203211346005"></p><p>这里只要查询结果里面的用户名是admin就会去比对密码，按照惯例第3列就是密码了，于是我们利用数组的md5返回null进行登录</p><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=1&#x27; union select 1,&#x27;admin&#x27;,null<span class="params">#</span><span class="built_in">&amp;</span>pw[]=1</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 杂项 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>春秋云镜Time</title>
       <link href="/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/"/>
       <url>/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/</url>
