@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="GitHack工具落后了，所以重新下载一个，配置一下代理 配置代理在clash里面把局域网连接打开，只要是我这台电脑的网卡进来都走这个  然后VMware设置桥接模式。目的：让虚拟机和物理机平起平坐，处于同一网段。  虚拟机设置里面，然后kali配置临时代理 12export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;172.25.173.165:7897&quot;">
+    <meta name="description" content="GitHack工具落后了，所以重新下载一个，配置一下代理 配置代理在clash里面把局域网连接打开，只要是我这台电脑的网卡进来都走这个  然后VMware设置桥接模式。目的：让虚拟机和物理机平起平坐，处于同一网段。  虚拟机设置里面，然后kali配置临时代理 12export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;192.168.1.11:7897&quot;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kali配置代理下载GitHack">
 <meta property="og:url" content="https://rufeii.github.io/2025/12/27/kali%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E4%B8%8B%E8%BD%BDGitHack/index.html">
 <meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="GitHack工具落后了，所以重新下载一个，配置一下代理 配置代理在clash里面把局域网连接打开，只要是我这台电脑的网卡进来都走这个  然后VMware设置桥接模式。目的：让虚拟机和物理机平起平坐，处于同一网段。  虚拟机设置里面，然后kali配置临时代理 12export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;172.25.173.165:7897&quot;">
+<meta property="og:description" content="GitHack工具落后了，所以重新下载一个，配置一下代理 配置代理在clash里面把局域网连接打开，只要是我这台电脑的网卡进来都走这个  然后VMware设置桥接模式。目的：让虚拟机和物理机平起平坐，处于同一网段。  虚拟机设置里面，然后kali配置临时代理 12export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;192.168.1.11:7897&quot;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251227211234755.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251227211506305.png">
 <meta property="article:published_time" content="2025-12-27T13:01:49.000Z">
-<meta property="article:modified_time" content="2025-12-27T13:26:48.343Z">
+<meta property="article:modified_time" content="2026-02-08T13:43:30.930Z">
 <meta property="article:author" content="Rufeii">
 <meta property="article:tag" content="GitHack">
 <meta name="twitter:card" content="summary">
@@ -173,7 +173,7 @@
 <p>然后VMware设置桥接模式。<strong>目的：让虚拟机和物理机平起平坐，处于同一网段。</strong></p>
 <p><img src="/../images/achieve/2025/12/image-20251227211506305.png" alt="image-20251227211506305"></p>
 <p>虚拟机设置里面，然后kali配置临时代理</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http<span class="built_in">_</span>proxy=&quot;http://172.25.173.165:7897&quot;                                       </span><br><span class="line">export https<span class="built_in">_</span>proxy=&quot;http://172.25.173.165:7897&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http<span class="built_in">_</span>proxy=&quot;http://192.168.1.11:7897&quot;                                       </span><br><span class="line">export https<span class="built_in">_</span>proxy=&quot;http://192.168.1.11:7897&quot;</span><br></pre></td></tr></table></figure>
 
 <p>IP为无线局域网适配器 WLAN下的ipv4</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://google.com   </span><br><span class="line">用这个来检验一下</span><br></pre></td></tr></table></figure>
@@ -185,13 +185,27 @@
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2403_88003384/article/details/148908011?ops_request_misc=%7B%22request_id%22:%227a7a133f531abfa6c67ffbe60fe89786%22,%22scm%22:%2220140713.130102334.pc_blog.%22%7D&request_id=7a7a133f531abfa6c67ffbe60fe89786&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-148908011-null-null.nonecase&utm_term=git&spm=1018.2226.3001.4450">CTFHub Web 信息泄露 Git泄露（log，stash，index）_git泄露得到index-CSDN博客</a></p>
 <p>ok结束！</p>
 <h2 id="另外"><a href="#另外" class="headerlink" title="另外"></a>另外</h2><p>还可以使用<code>proxychains</code>这个来走代理，改这个文件&#x2F;etc&#x2F;proxychains4.conf</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">#</span> 把这里改成你之前成功的那个物理 IP 和端口</span><br><span class="line">socks5  172.25.173.165  7897</span><br></pre></td></tr></table></figure>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">#</span> 把这里改成你之前成功的那个物理 IP 和端口</span><br><span class="line">socks5  192.168.1.11  7897</span><br></pre></td></tr></table></figure>
 
 <p>之后的使用就是加前缀就好了，之前搭建隧道用的就是这个</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains git clone https://github.com/...</span><br></pre></td></tr></table></figure>
 
 
 
+<p>byd自己写自己后面来用发现不行，漏写了一点就是防火墙的问题</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet 192.168.1.11 7897</span><br></pre></td></tr></table></figure>
+
+<p>发现死活连不上，可以ping通，那么就是请求被拦截了，防火墙得关了发现可以，为了长久一点我们配置一下入站规则:</p>
+<ol>
+<li><strong>打开设置</strong>：点击“高级设置”（就在你截图里的那个“防火墙和网络保护”界面的最下方）。</li>
+<li><strong>新建规则</strong>：在弹出的窗口左侧点击“<strong>入站规则</strong>”，然后在右侧点击“**新建规则…**”。</li>
+<li><strong>选择类型</strong>：选择“<strong>端口</strong>”，点击下一步。</li>
+<li><strong>协议和端口</strong>：选择“<strong>TCP</strong>”，并在“特定本地端口”中输入 <code>7897</code>。</li>
+<li><strong>操作</strong>：选择“<strong>允许连接</strong>”。</li>
+<li><strong>配置文件</strong>：默认全选（域、专用、公用）。</li>
+<li><strong>名称</strong>：起个名字，比如 <code>Allow_Kali_7897</code>，点击完成。</li>
+</ol>
+<p>那么同一局域网下就都可以访问7897这个端口了</p>
 
   </div>
 </article>
