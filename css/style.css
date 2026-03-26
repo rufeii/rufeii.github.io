@@ -434,6 +434,23 @@ body td {
   padding: 0 8px;
   border-bottom: none;
 }
+#search-input {
+  width: 100%;
+  padding: 14px 20px;
+  margin: 25px 0;
+  border: 1px solid #444;
+  border-radius: 0px;
+  background-color: #2d2d2d;
+  color: #eee;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+#search-input:focus {
+  outline: none;
+  border-color: #50fa7b;
+  box-shadow: 0 0 0 3px rgba(80,250,123,0.2);
+}
 @font-face {
   font-style: normal;
   font-family: "Meslo LG";
@@ -671,32 +688,79 @@ body {
     display: table-cell;
     vertical-align: middle;
   }
-  #header #nav ul a:hover {
-    background: none;
+  #header #nav {
+    color: #2bbc8a;
+    letter-spacing: 0.05em;
+    font-family: "Source Code Pro", "Consolas", monospace;
+    font-size: 0.9rem;
+  }
+  #header #nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    line-height: 2rem;
   }
   #header #nav ul li {
-    display: none;
-    border-right: 0;
-  }
-  #header #nav ul li.icon {
-    position: absolute;
-    top: 77px;
-    right: 1rem;
     display: inline-block;
-    text-align: center;
+    margin-right: 25px;
+    border-right: none !important;
+    vertical-align: middle;
   }
-  #header #nav ul.responsive li {
-    display: block;
+  #header #nav ul li:before {
+    content: "λ ";
+    color: #2bbc8a;
+    opacity: 0.6;
   }
-  #header #nav ul a[aria-label="Menu"] {
-    display: inline-block;
-    min-width: 48px;
-    min-height: 48px;
+  #header #nav ul a {
+    color: #2bbc8a;
+    text-decoration: none;
+    position: relative;
+    padding: 2px 4px;
   }
-  #header #nav li:not(:first-child) {
-    padding-top: 1rem;
-    padding-left: 70px;
-    font-size: 1rem;
+  #header #nav ul a:hover {
+    color: #fff !important;
+    background: rgba(43,188,138,0.2);
+    box-shadow: 0 0 8px rgba(43,188,138,0.8);
+  }
+  #header #nav ul a:hover:after {
+    content: "|";
+    margin-left: 4px;
+    animation: blink 0.7s infinite;
+  }
+  #header #nav ul li:last-child {
+    margin-right: 0;
+  }
+}
+@-moz-keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@-o-keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }
 #header-post {
@@ -1661,4 +1725,71 @@ code {
 }
 #header-post #actions {
   direction: ltr !important;
+  transition: all 0.2s ease !important;
+}
+/* --- THE NUCLEAR OPTION: FIXED POST NAV --- */
+#header-post {
+  top: 0 !important;
+  background: #1d1f21 !important;
+  width: 100% !important;
+  height: 40px !important;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+  display: block !important;
+}
+#header-post .separator,
+#header-post .active,
+#header-post .icon,
+#header-post #top-icon-tablet,
+#header-post #share-tracker,
+#header-post #top-icon {
+  display: none !important;
+}
+#header-post #nav {
+  position: absolute !important;
+  left: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  display: block !important;
+}
+#header-post #nav ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  border: none !important;
+}
+#header-post #nav ul li {
+  border: none !important;
+  margin-right: 20px !important;
+  display: block !important;
+}
+#header-post #nav ul li a {
+  color: #2bbc8a !important;
+  font-size: 0.85rem !important;
+  background: none !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+#header-post #nav ul li a:hover {
+  color: #fff !important;
+}
+#header-post #menu-icon,
+#header-post #menu-icon-tablet {
+  position: absolute !important;
+  right: 20px !important;
+  left: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #2bbc8a !important;
+  font-size: 1.2rem !important;
+  z-index: 9999 !important;
+}
+.content.post {
+  margin-top: 50px !important;
 }
