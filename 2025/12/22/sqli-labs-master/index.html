@@ -1,172 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Less-11就是一个post注入测出闭合方式为单引号，没有过滤 Less-12测出闭合方式为”)，没有任何过滤 Less-13测出闭合方式之后无回显优先尝试报错注入updatexml，依旧没有过滤 Less-14闭合方式变了，报错注入依然可以 Less-15一开始测闭合没测出来，因为不管我用什么都没发现报错，索性就是直接sqlmap去试一下 1sqlmap.py -u http:&#x2F;&#x2F;127.0.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="sqli-labs-master">
-<meta property="og:url" content="https://rufeii.github.io/2025/12/22/sqli-labs-master/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="Less-11就是一个post注入测出闭合方式为单引号，没有过滤 Less-12测出闭合方式为”)，没有任何过滤 Less-13测出闭合方式之后无回显优先尝试报错注入updatexml，依旧没有过滤 Less-14闭合方式变了，报错注入依然可以 Less-15一开始测闭合没测出来，因为不管我用什么都没发现报错，索性就是直接sqlmap去试一下 1sqlmap.py -u http:&#x2F;&#x2F;127.0.">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251222220207921.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251223211536324.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251226171429344.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251230150031974.png">
-<meta property="article:published_time" content="2025-12-22T13:53:04.000Z">
-<meta property="article:modified_time" content="2026-01-11T07:44:28.329Z">
-<meta property="article:author" content="Rufeii">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251222220207921.png">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      sqli-labs-master 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>sqli-labs-master</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/2026/01/04/something-about-XSS-Challenges/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2025/12/20/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CBrute4Road/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/22/sqli-labs-master/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&text=sqli-labs-master"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&is_video=false&description=sqli-labs-master"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=sqli-labs-master&body=Check out this article: https://rufeii.github.io/2025/12/22/sqli-labs-master/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&name=sqli-labs-master&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/12/22/sqli-labs-master/&t=sqli-labs-master"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-11"><span class="toc-number">1.</span> <span class="toc-text">Less-11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-12"><span class="toc-number">2.</span> <span class="toc-text">Less-12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-13"><span class="toc-number">3.</span> <span class="toc-text">Less-13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-14"><span class="toc-number">4.</span> <span class="toc-text">Less-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-15"><span class="toc-number">5.</span> <span class="toc-text">Less-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-16"><span class="toc-number">6.</span> <span class="toc-text">Less-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-17-update%E6%B3%A8%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">Less-17(update注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-18"><span class="toc-number">8.</span> <span class="toc-text">Less-18</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-19"><span class="toc-number">9.</span> <span class="toc-text">Less-19</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-20"><span class="toc-number">10.</span> <span class="toc-text">Less-20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-21"><span class="toc-number">11.</span> <span class="toc-text">Less-21</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-22"><span class="toc-number">12.</span> <span class="toc-text">Less-22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-23"><span class="toc-number">13.</span> <span class="toc-text">Less-23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-24"><span class="toc-number">14.</span> <span class="toc-text">Less-24</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25"><span class="toc-number">15.</span> <span class="toc-text">Less-25</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25a"><span class="toc-number">16.</span> <span class="toc-text">Less-25a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26-%E6%97%A0%E7%A9%BA%E6%A0%BC%E5%92%8C%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="toc-number">17.</span> <span class="toc-text">Less-26(无空格和注释符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26a"><span class="toc-number">18.</span> <span class="toc-text">Less-26a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27"><span class="toc-number">19.</span> <span class="toc-text">Less-27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27a"><span class="toc-number">20.</span> <span class="toc-text">Less-27a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28"><span class="toc-number">21.</span> <span class="toc-text">Less-28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28a"><span class="toc-number">22.</span> <span class="toc-text">Less-28a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-29-31"><span class="toc-number">23.</span> <span class="toc-text">Less-29~31</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-32"><span class="toc-number">24.</span> <span class="toc-text">Less-32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-33"><span class="toc-number">25.</span> <span class="toc-text">Less-33</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-34"><span class="toc-number">26.</span> <span class="toc-text">Less-34</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-35"><span class="toc-number">27.</span> <span class="toc-text">Less-35</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-36"><span class="toc-number">28.</span> <span class="toc-text">Less-36</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-37"><span class="toc-number">29.</span> <span class="toc-text">Less-37</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-38-%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">30.</span> <span class="toc-text">Less-38(堆叠注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-39"><span class="toc-number">31.</span> <span class="toc-text">Less-39</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-40"><span class="toc-number">32.</span> <span class="toc-text">Less-40</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-41"><span class="toc-number">33.</span> <span class="toc-text">Less-41</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        sqli-labs-master
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2025-12-22T13:53:04.000Z" class="dt-published" itemprop="datePublished">2025-12-22</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/sql%E6%B3%A8%E5%85%A5/">sql注入</a>
-    </div>
-
-
-      
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>就是一个post注入测出闭合方式为单引号，没有过滤</p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">sqli-labs-master</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-01-11 15:44:28
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/sql%E6%B3%A8%E5%85%A5/" title="sql注入">
+                    <b>#</b> sql注入
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><p>就是一个post注入测出闭合方式为单引号，没有过滤</p>
 <h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>测出闭合方式为”)，没有任何过滤</p>
 <h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>测出闭合方式之后无回显优先尝试报错注入updatexml，依旧没有过滤</p>
 <h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>闭合方式变了，报错注入依然可以</p>
@@ -272,150 +283,159 @@
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有鸡肋，你得知道当前的表名</span><br><span class="line">爆库：0&#x27;);update users set password=(select database()) where id=1--+</span><br><span class="line">.....后面类似</span><br></pre></td></tr></table></figure>
 
 <h2 id="Less-41"><a href="#Less-41" class="headerlink" title="Less-41"></a>Less-41</h2>
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-11"><span class="toc-number">1.</span> <span class="toc-text">Less-11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-12"><span class="toc-number">2.</span> <span class="toc-text">Less-12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-13"><span class="toc-number">3.</span> <span class="toc-text">Less-13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-14"><span class="toc-number">4.</span> <span class="toc-text">Less-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-15"><span class="toc-number">5.</span> <span class="toc-text">Less-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-16"><span class="toc-number">6.</span> <span class="toc-text">Less-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-17-update%E6%B3%A8%E5%85%A5"><span class="toc-number">7.</span> <span class="toc-text">Less-17(update注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-18"><span class="toc-number">8.</span> <span class="toc-text">Less-18</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-19"><span class="toc-number">9.</span> <span class="toc-text">Less-19</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-20"><span class="toc-number">10.</span> <span class="toc-text">Less-20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-21"><span class="toc-number">11.</span> <span class="toc-text">Less-21</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-22"><span class="toc-number">12.</span> <span class="toc-text">Less-22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-23"><span class="toc-number">13.</span> <span class="toc-text">Less-23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-24"><span class="toc-number">14.</span> <span class="toc-text">Less-24</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25"><span class="toc-number">15.</span> <span class="toc-text">Less-25</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25a"><span class="toc-number">16.</span> <span class="toc-text">Less-25a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26-%E6%97%A0%E7%A9%BA%E6%A0%BC%E5%92%8C%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="toc-number">17.</span> <span class="toc-text">Less-26(无空格和注释符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26a"><span class="toc-number">18.</span> <span class="toc-text">Less-26a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27"><span class="toc-number">19.</span> <span class="toc-text">Less-27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27a"><span class="toc-number">20.</span> <span class="toc-text">Less-27a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28"><span class="toc-number">21.</span> <span class="toc-text">Less-28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28a"><span class="toc-number">22.</span> <span class="toc-text">Less-28a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-29-31"><span class="toc-number">23.</span> <span class="toc-text">Less-29~31</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-32"><span class="toc-number">24.</span> <span class="toc-text">Less-32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-33"><span class="toc-number">25.</span> <span class="toc-text">Less-33</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-34"><span class="toc-number">26.</span> <span class="toc-text">Less-34</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-35"><span class="toc-number">27.</span> <span class="toc-text">Less-35</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-36"><span class="toc-number">28.</span> <span class="toc-text">Less-36</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-37"><span class="toc-number">29.</span> <span class="toc-text">Less-37</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-38-%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">30.</span> <span class="toc-text">Less-38(堆叠注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-39"><span class="toc-number">31.</span> <span class="toc-text">Less-39</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-40"><span class="toc-number">32.</span> <span class="toc-text">Less-40</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-41"><span class="toc-number">33.</span> <span class="toc-text">Less-41</span></a></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/12/20/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CBrute4Road/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-01-11 15:44:28
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/sql%E6%B3%A8%E5%85%A5/" title="sql注入">
+                        <b>#</b> sql注入
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2026/01/04/something-about-XSS-Challenges/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/22/sqli-labs-master/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&text=sqli-labs-master"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&is_video=false&description=sqli-labs-master"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=sqli-labs-master&body=Check out this article: https://rufeii.github.io/2025/12/22/sqli-labs-master/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&title=sqli-labs-master"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/12/22/sqli-labs-master/&name=sqli-labs-master&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/12/22/sqli-labs-master/&t=sqli-labs-master"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-11"><span class="toc-text">Less-11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-12"><span class="toc-text">Less-12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-13"><span class="toc-text">Less-13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-14"><span class="toc-text">Less-14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-15"><span class="toc-text">Less-15</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-16"><span class="toc-text">Less-16</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-17-update%E6%B3%A8%E5%85%A5"><span class="toc-text">Less-17(update注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-18"><span class="toc-text">Less-18</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-19"><span class="toc-text">Less-19</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-20"><span class="toc-text">Less-20</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-21"><span class="toc-text">Less-21</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-22"><span class="toc-text">Less-22</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-23"><span class="toc-text">Less-23</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-24"><span class="toc-text">Less-24</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25"><span class="toc-text">Less-25</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-25a"><span class="toc-text">Less-25a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26-%E6%97%A0%E7%A9%BA%E6%A0%BC%E5%92%8C%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="toc-text">Less-26(无空格和注释符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-26a"><span class="toc-text">Less-26a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27"><span class="toc-text">Less-27</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-27a"><span class="toc-text">Less-27a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28"><span class="toc-text">Less-28</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-28a"><span class="toc-text">Less-28a</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-29-31"><span class="toc-text">Less-29~31</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-32"><span class="toc-text">Less-32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-33"><span class="toc-text">Less-33</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-34"><span class="toc-text">Less-34</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-35"><span class="toc-text">Less-35</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-36"><span class="toc-text">Less-36</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-37"><span class="toc-text">Less-37</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-38-%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-text">Less-38(堆叠注入)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-39"><span class="toc-text">Less-39</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-40"><span class="toc-text">Less-40</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Less-41"><span class="toc-text">Less-41</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + sqli-labs-master + '&url=' + https%3A%2F%2Frufeii.github.io%2F2025%2F12%2F22%2Fsqli-labs-master%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/22/sqli-labs-master/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

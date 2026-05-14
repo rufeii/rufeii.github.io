@@ -1,171 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="什么是picklepickle是实现python序列化和反序列化操作的模块之一。pickle可以看作是一种独立的栈语言，它由一串串opcode（指令集）组成。该语言的解析是依靠Pickle Virtual Machine （PVM）进行的。 pickle序列化和反序列化的分析12345678910111213141516171819202122232425262728import picklecl">
-<meta property="og:type" content="article">
-<meta property="og:title" content="浅析pickle反序列化">
-<meta property="og:url" content="https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="什么是picklepickle是实现python序列化和反序列化操作的模块之一。pickle可以看作是一种独立的栈语言，它由一串串opcode（指令集）组成。该语言的解析是依靠Pickle Virtual Machine （PVM）进行的。 pickle序列化和反序列化的分析12345678910111213141516171819202122232425262728import picklecl">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2026-05-13T15:58:39.000Z">
-<meta property="article:modified_time" content="2026-05-13T16:52:05.109Z">
-<meta property="article:author" content="Rufeii">
-<meta property="article:tag" content="pickle">
-<meta name="twitter:card" content="summary">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      浅析pickle反序列化 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>浅析pickle反序列化</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2026/03/15/%E9%9D%B6%E6%9C%BAStream/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=浅析pickle反序列化"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=浅析pickle反序列化"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=浅析pickle反序列化&body=Check out this article: https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=浅析pickle反序列化&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=浅析pickle反序列化"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFpickle"><span class="toc-number">1.</span> <span class="toc-text">什么是pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">pickle序列化和反序列化的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reduce-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">__reduce__魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-number">4.</span> <span class="toc-text">pickle反序列化漏洞成因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#opcode%E5%88%A9%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">opcode利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96"><span class="toc-number">5.2.</span> <span class="toc-text">变量覆盖</span></a></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        浅析pickle反序列化
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2026-05-13T15:58:39.000Z" class="dt-published" itemprop="datePublished">2026-05-13</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E6%9D%82%E9%A1%B9/">杂项</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/pickle/" rel="tag">pickle</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="什么是pickle"><a href="#什么是pickle" class="headerlink" title="什么是pickle"></a>什么是pickle</h2><p>pickle是实现python序列化和反序列化操作的模块之一。pickle可以看作是一种独立的栈语言，它由一串串opcode（指令集）组成。该语言的解析是依靠Pickle Virtual Machine （PVM）进行的。</p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">浅析pickle反序列化</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-05-14 00:52:05
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/%E6%9D%82%E9%A1%B9/" title="杂项">
+                    <b>#</b> 杂项
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="什么是pickle"><a href="#什么是pickle" class="headerlink" title="什么是pickle"></a>什么是pickle</h2><p>pickle是实现python序列化和反序列化操作的模块之一。pickle可以看作是一种独立的栈语言，它由一串串opcode（指令集）组成。该语言的解析是依靠Pickle Virtual Machine （PVM）进行的。</p>
 <h2 id="pickle序列化和反序列化的分析"><a href="#pickle序列化和反序列化的分析" class="headerlink" title="pickle序列化和反序列化的分析"></a>pickle序列化和反序列化的分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Myclass</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):                 <span class="comment">#只要对象被创建就会触发这个初始化方法</span></span><br><span class="line">        <span class="variable language_">self</span>.name = <span class="string">&#x27;rufeii&#x27;</span></span><br><span class="line">        <span class="variable language_">self</span>.age = <span class="number">19</span></span><br><span class="line">        <span class="variable language_">self</span>.language = <span class="string">&#x27;Chinese&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;初始化触发&#x27;</span>)</span><br><span class="line"></span><br><span class="line">a = Myclass()</span><br><span class="line"><span class="built_in">print</span>(a.name)</span><br><span class="line"></span><br><span class="line"><span class="comment">#序列化</span></span><br><span class="line">a_p = pickle.dumps(a)</span><br><span class="line"><span class="built_in">print</span>(a_p)</span><br><span class="line"></span><br><span class="line"><span class="comment">#反序列化</span></span><br><span class="line">a_up = pickle.loads(a_p)</span><br><span class="line"><span class="built_in">print</span>(a_up)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(a_up.__dict__)           <span class="comment">#__dict__为对象的属性字典</span></span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">初始化触发</span><br><span class="line">rufeii</span><br><span class="line"><span class="string">b&#x27;\x80\x04\x95M\x00\x00\x00\x00\x00\x00\x00\x8c\x08__main__\x94\x8c\x07Myclass\x94\x93\x94)\x81\x94&#125;\x94(\x8c\x04name\x94\x8c\x06rufeii\x94\x8c\x03age\x94K\x13\x8c\x08language\x94\x8c\x07Chinese\x94ub.&#x27;</span></span><br><span class="line">&lt;__main__.Myclass <span class="built_in">object</span> at <span class="number">0x00000226733A5D10</span>&gt;</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;rufeii&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">19</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;Chinese&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>序列化分析：</strong></p>
@@ -381,150 +393,154 @@
 <h3 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> pickletools</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age</span>):</span><br><span class="line">        <span class="variable language_">self</span>.name = name</span><br><span class="line">        <span class="variable language_">self</span>.age = age</span><br><span class="line">        <span class="variable language_">self</span>.role = <span class="string">&quot;user&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">original_person = Person(<span class="string">&quot;Alice&quot;</span>, <span class="number">25</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;原始对象: name=<span class="subst">&#123;original_person.name&#125;</span>, age=<span class="subst">&#123;original_person.age&#125;</span>, role=<span class="subst">&#123;original_person.role&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">opcode = <span class="string">b&#x27;&#x27;&#x27;c__main__</span></span><br><span class="line"><span class="string">Person</span></span><br><span class="line"><span class="string">(S&#x27;Bob&#x27;</span></span><br><span class="line"><span class="string">I30</span></span><br><span class="line"><span class="string">tR&#125;(S&#x27;role&#x27;</span></span><br><span class="line"><span class="string">S&#x27;admin&#x27;</span></span><br><span class="line"><span class="string">S&#x27;password&#x27;</span></span><br><span class="line"><span class="string">S&#x27;secret123&#x27;</span></span><br><span class="line"><span class="string">S&#x27;age&#x27;</span></span><br><span class="line"><span class="string">I999</span></span><br><span class="line"><span class="string">ub.&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">person = pickle.loads(opcode)</span><br><span class="line">pickletools.dis(opcode)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;覆盖后: name=<span class="subst">&#123;person.name&#125;</span>, age=<span class="subst">&#123;person.age&#125;</span>, role=<span class="subst">&#123;person.role&#125;</span>, password=<span class="subst">&#123;person.password&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;新增属性: password=<span class="subst">&#123;person.password&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFpickle"><span class="toc-number">1.</span> <span class="toc-text">什么是pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">pickle序列化和反序列化的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reduce-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">__reduce__魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-number">4.</span> <span class="toc-text">pickle反序列化漏洞成因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#opcode%E5%88%A9%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">opcode利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96"><span class="toc-number">5.2.</span> <span class="toc-text">变量覆盖</span></a></li></ol></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2026/03/15/%E9%9D%B6%E6%9C%BAStream/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-05-14 00:52:05
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E6%9D%82%E9%A1%B9/" title="杂项">
+                        <b>#</b> 杂项
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&text=浅析pickle反序列化"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&is_video=false&description=浅析pickle反序列化"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=浅析pickle反序列化&body=Check out this article: https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&title=浅析pickle反序列化"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&name=浅析pickle反序列化&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/&t=浅析pickle反序列化"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFpickle"><span class="toc-text">什么是pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-text">pickle序列化和反序列化的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reduce-%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-text">__reduce__魔术方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-text">pickle反序列化漏洞成因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#opcode%E5%88%A9%E7%94%A8"><span class="toc-text">opcode利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-text">命令执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96"><span class="toc-text">变量覆盖</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96 + '&url=' + https%3A%2F%2Frufeii.github.io%2F2026%2F05%2F13%2F%25E6%25B5%2585%25E6%259E%2590pickle%25E5%258F%258D%25E5%25BA%258F%25E5%2588%2597%25E5%258C%2596%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>

