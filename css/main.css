@@ -1047,26 +1047,49 @@ figure .pin-copy {
 
 /* dark scheme */
 :root[color-mode="dark"] {
-  --bg-body: #2E3440;
-  --color-text-base: #C1C2C5;
-  --color-text-a: #C1C2C5;
+  --bg-body: #1e1e1e;
+  --color-text-base: #CCCCCC;
+  --color-text-a: #CCCCCC;
   --color-text-a-hover: #FFFFFF;
   --color-text-a-active: #FFFFFF;
   --color-text-sub: #8e8e8e;
-  --color-text-md-title: #eceff4;
-  --color-text-md-content: #eceff4;
-  --color-text-md-code: #e96900;
-  --bg-text-md-code: #3b4252;
-  --bg-block-md-quote: #3a4252;
-  --color-block-md-quote: #abb9cf;
-  --color-divider-md-border: #ffffff4f;
-  --bg-content-search: rgb(59 66 82 / 60%);
-  --bg-block-md-pre: #3a4252;
-  --color-text-md-pre: #abb9cf;
-  --bg-block-md-table: #2E3440;
-  --bg-block-md-table-2: #313744;
-  --color-border-md-table: #4c566a;
+  --color-text-md-title: #FFFFFF;
+  --color-text-md-content: #e0e0e0;
+  --color-text-md-code: #ff8c00;
+  --bg-text-md-code: #2a2a2a;
+  --bg-block-md-quote: #2a2a2a;
+  --color-block-md-quote: #aaaaaa;
+  --color-divider-md-border: #ffffff33;
+  --bg-content-search: rgb(40 40 40 / 80%);
+  --bg-block-md-pre: #2a2a2a;
+  --color-text-md-pre: #cccccc;
+  --bg-block-md-table: #1e1e1e;
+  --bg-block-md-table-2: #252525;
+  --color-border-md-table: #3a3a3a;
 }
+
+/* A - 点阵网格纹理 */
+html[color-mode="dark"] body {
+  background-image: radial-gradient(circle, #444 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ASCII 猫 - 左下角 */
+html[color-mode="dark"] body::after {
+  content: "  /\\_/\\\A ( o.o )\A  > ^ <";
+  white-space: pre;
+  position: fixed;
+  left: 2rem;
+  bottom: 2rem;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: #555;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  font-family: Consolas, "Liberation Mono", monospace;
+}
+
 
 * {
   margin: 0;
@@ -2152,41 +2175,50 @@ a:hover {
   margin-left: 30px;
 }
 .v[data-class="v"] .vwrap .vheader .vinput:focus {
-  border-bottom-color: #808080 !important;
+  border-bottom-color: #000 !important;
 }
 .v[data-class="v"] .vbtn:active,
 .v[data-class="v"] .vbtn:hover {
-  border-color: #808080 !important;
+  border-color: #000 !important;
 }
 .v[data-class="v"] .vcards .vcard .vh .vmeta .vat {
-  color: #808080 !important;
+  color: #000 !important;
 }
 .v[data-class="v"] a {
-  color: #808080 !important;
+  color: #000 !important;
 }
 .fancybox-progress {
-  background: #808080 !important;
+  background: #000 !important;
 }
 .markdown-body code {
-  color: #808080;
+  color: #000;
 }
 .markdown-body a:hover {
-  border-bottom: 2px solid #808080;
+  border-bottom: 2px solid #000;
 }
 .markdown-body blockquote {
-  border-color: #808080;
+  border-color: #000;
 }
 .toc-link:hover::after {
-  background-color: #808080;
+  background-color: #000;
 }
 .toc-link.active::after {
-  background-color: #808080;
+  background-color: #000;
+}
+.navbar ul li a {
+  color: #2bbc8a;
+}
+.navbar ul li a:hover {
+  color: #2bbc8a;
 }
 .navbar ul li a:hover::after {
-  background-color: #808080;
+  content: none;
+}
+.navbar ul li.active a {
+  color: #2bbc8a;
 }
 .navbar ul li.active a::after {
-  background-color: #808080;
+  content: none;
 }
 .markdown-body h1 .headerlink::before,
 .markdown-body h2 .headerlink::before,
@@ -2194,5 +2226,5 @@ a:hover {
 .markdown-body h4 .headerlink::before,
 .markdown-body h5 .headerlink::before,
 .markdown-body h6 .headerlink::before {
-  color: #808080;
+  color: #000;
 }

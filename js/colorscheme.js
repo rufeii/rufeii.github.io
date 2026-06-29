@@ -21,7 +21,10 @@ const switchMode = () => {
 switchHandle.addEventListener('click', switchMode, false)
 
 const currColorMode = localStorage.getItem('color-mode')
-if (currColorMode === 'light') {
+if (currColorMode) {
+    html.setAttribute('color-mode', currColorMode)
+}
+if (html.getAttribute('color-mode') === 'light') {
     themeIcon.classList = 'iconfont icon-moon'
 } else {
     themeIcon.classList = 'iconfont icon-sun'
